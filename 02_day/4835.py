@@ -12,8 +12,8 @@ for i in range(1, t+1):
             sum += int_list[k]
         result_list.append(sum)
     # print('합계는 {}'.format(sum))
-    max_val = result_list[0]
-    min_val = result_list[0]
+    max_val = min_val = result_list[0]
+
     for value in result_list:
         if value > max_val:
             max_val = value
@@ -21,4 +21,20 @@ for i in range(1, t+1):
             min_val = value
     print('#{} {}'.format(i, (max_val - min_val)))
 
+LIST = [1, 3, 5, 6, 9, 4, 2, 8, 5, 10]
 
+'''
+sum[0] = 9
+sum[1] = 
+
+'''
+
+
+'''
+슬라이딩 윈도우
+ > 배열의 연속적인 공간을 왼쪽에서 오른쪽으로 움직이며 문제를 해결하는 방법
+ 
+첫번째 구간의 합  : sum
+두번째 구간의 합 : sum += (arr[i + M] - arr[N])
+
+'''
