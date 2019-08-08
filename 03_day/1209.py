@@ -53,10 +53,12 @@ while True:
         cols_sum, rows_sum = 0, 0
         for k in range(0, 100):
             cols_sum += array_list[j][k]
+            rows_sum += array_list[k][j]
         if cols_sum > cols_max:
             cols_max = cols_sum
         if rows_sum > cols_max:
             rows_max = rows_sum
+        total_max = max()
 
     for j in range(0, 100):
         cross_sum += array_list[j][j]
