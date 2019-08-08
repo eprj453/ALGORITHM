@@ -20,5 +20,6 @@ for i in range(1<<n):
     print('i : {}'.format(i))
     for j in range(n+1):
         if i & (1<<j):
-            print(subset_list[j], end= ', ')
+            print(subset_list[j], end=', ')
+        # print('----')
     print()

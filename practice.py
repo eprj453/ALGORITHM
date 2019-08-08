@@ -1,41 +1,17 @@
-def summary(word):
-    count = 0
-    count_char = ''
-
-    for idx in range(0, len(word)):
-        if idx == len(word) - 1:
-            if word[idx] == word[idx - 1]:
-                count += 1
-                count_char += (word[idx - 1] + str(count))
-            elif word[idx] != word[idx - 1]:
-                count_char += (word[idx - 1] + str(count))
-                count_char += word[idx]
-                count_char += '1'
-            break
-        elif idx > 0 and word[idx] != word[idx - 1]:
-            count_char += word[idx - 1]
-            count_char += str(count)
-            count = 1
-        else:
-            count += 1
-
-    return count_char
-
-
-# def summary(word):
-#     result = []
-#     tmp_list = []
+# temp_list = [1,2,3,4,5,6,7,8]
+# temp_list2 = []
+# count_list = []
+# count = 0
+# for j in range(1 << len(temp_list)):
+#     for k in range(len(temp_list) + 1):
+#         if j & (1 << k):
+#             temp_list2.append(temp_list[k])
+#     if len(temp_list2) == 4:
+#         count_list.append(temp_list2)
+#         count+=1
+#     temp_list2 = []
 #
-#     for char in word:
-#         if tmp_list and tmp_list[-1] != char:
-#             result.append(tmp_list[-1])
-#             result.append('{}'.format(len(tmp_list)))
-#             tmp_list.clear()
-#
-#         tmp_list.append(char)
-#     result.append(tmp_list[-1])
-#     result.append('{}'.format(len(tmp_list)))
+# print(count)
+# print(count_list)
 
-print(summary('aabbaacc'))
-print(summary('ffgggeeeef'))
-print(summary('abcdefg'))
+print(list(range(4)))

@@ -7,40 +7,30 @@ for i in range(1, t+1):
     food_list = []
     for j in range(n):
         food_list.append(list(map(int, input().split())))
+    temp_list = list(range(n))
+    temp_list2, temp_list3, count_list, count_list2 = [], [], [], []
+
+    for j in range(1 << len(temp_list)):
+        for k in range(len(temp_list)+1):
+            if j & ( 1 << k ):
+                temp_list2.append(temp_list[k])
+        if len(temp_list2) == n/2:
+            for cnt in range(n):
+                if cnt not in temp_list2:
+                    temp_list3.append(cnt)
+            count_list.append(temp_list2)
+            count_list2.append(temp_list3)
+        temp_list2 = []
+        temp_list3 = []
 
     taste = 10000000000
-    for j in range(len(food_list)):
+    for j in range(len(count_list)):
         a, b = 0, 0
-        a_sum, b_sum = 0
-        for k in range(len(food_list[0])):
-            if j == k:
-                pass
-            else:
-                a += food_list[j][k]
-                a += food_list[k][j]
-            for m in range(len(food_list)):
-                for l in range(len(food_list[0])):
-                    if m == l or (j == m and k == l):
-                        pass
-                    else:
-                        b += food_list[m][l]
-                        b += food_list[l][m]
-            if abs(a+b) < taste:
-                taste = abs(a+b)
+        for k in range(len(count_list[0])):
+            for p in range(k, len(count_list[0])):
+                a += (food_list[count_list[j][k]][count_list[j][p]] + food_list[count_list[j][p]][count_list[j][k]])
+                b += (food_list[count_list2[j][k]][count_list2[j][p]] + food_list[count_list2[j][p]][count_list2[j][k]])
+        if abs(a-b) < taste:
+            taste = abs(a-b)
 
-    print(taste)
-
-
-
-'''
-4
-0 5 3 8
-4 0 4 1
-2 5 0 3
-7 2 3 0
-4
-0 7 1 1
-7 0 6 2
-1 1 0 2
-10 1 9 0
-'''
+    print('#{} {}'.format(i, taste))
