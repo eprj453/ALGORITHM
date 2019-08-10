@@ -23,8 +23,11 @@ for i in range(1, t+1):
         temp_list2 = []
         temp_list3 = []
 
+    print(count_list)
+    print(count_list2)
+
     taste = 10000000000
-    for j in range(len(count_list)):
+    for j in range(len(count_list)//2):
         a, b = 0, 0
         for k in range(len(count_list[0])):
             for p in range(k, len(count_list[0])):
