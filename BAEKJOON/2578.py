@@ -23,20 +23,14 @@ for num in other_list:
     for i in range(len(temp)):
         for j in range(len(temp[0])):
             temp_char += str(temp[i][j])
+            temp_char2 += str(temp[j][i])
         if temp_char == '11111':
             bingo_count += 1
+        if temp_char2 == '11111':
+            bingo_count =+ 1
         temp_char = ''
+        temp2_char = ''
 
-    if bingo_count >= 3:
-        print(count)
-        break
-
-    for i in range(len(temp)):
-        for j in range(len(temp[0])):
-            temp_char += str(temp[j][i])
-        if temp_char == '11111':
-            bingo_count += 1
-        temp_char = ''
 
     if bingo_count >= 3:
         print(count)
