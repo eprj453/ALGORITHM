@@ -6,7 +6,7 @@ list1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
 t = int(input())
 for i in range(1, t+1):
     nk = list(map(int, input().split()))
-    print(nk[0], nk[1])
+    # print(nk[0], nk[1])
     temp = []
     temp2 = []
     sum_list = []
