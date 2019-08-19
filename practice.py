@@ -28,7 +28,14 @@ p_list = ['CCBCCABDADA',
           'GNFKELDPSAC',
           'LQOSMFMEKDB',
           'ASDASDSADAA']
+# p_list = []
+# for j in range(100):
+#     p_list.append(input())
 
+print(len(p_list))
+print(len(p_list[0]))
+print(p_list)
+print(type(p_list[0]))
 
 max_count = 0
 
@@ -38,7 +45,7 @@ for j in range(0, len(p_list)): # 행 도는 j 0~9
             count = 0
             for m in range(0, (len(p_list[0])-k)// 2):
                 # print(j, k, l ,m)
-                print(f' 가로 {j}, {k+m}, {j}, {l+k-m-1}')
+                # print(f' 가로 {j}, {k+m}, {j}, {l+k-m-1}')
                 if p_list[j][k+m] == p_list[j][l+k-m-1]: # k = 0 l = 10-0
                     if count < (l+k-m-1) - (k+m) + 1:
                         count = (l+k-m-1) - (k+m) + 1
@@ -48,12 +55,12 @@ for j in range(0, len(p_list)): # 행 도는 j 0~9
                     # print('max_count : {}'.format(max_count))
                 else:
                     count = 0
-                    print('break!')
+                    # print('break!')
                     break
             if count > max_count:
-                print('count : {}'.format(count))
+                # print('count : {}'.format(count))
                 max_count = count
-                print('max_count : {}'.format(max_count))
+                # print('max_count : {}'.format(max_count))
                 # print('max_count : {}'.format(max_count))
                 count = 0
                 break
@@ -65,7 +72,7 @@ for j in range(0, len(p_list)): # 행 도는 j 0~9
             count = 0
             for m in range(0, (len(p_list[0])-k)// 2):
                 # print(j, k, l ,m)
-                print(f' 가로 {j}, {k+m}, {j}, {l+k-m-1}')
+                # print(f' 가로 {j}, {k+m}, {j}, {l+k-m-1}')
                 if p_list[k+m][j] == p_list[l+k-m-1][j]: # k = 0 l = 10-0
                     if count < (l+k-m-1) - (k+m) + 1:
                         count = (l+k-m-1) - (k+m) + 1
@@ -74,12 +81,12 @@ for j in range(0, len(p_list)): # 행 도는 j 0~9
                     # print('max_count : {}'.format(max_count))
                 else:
                     count = 0
-                    print('break!')
+                    # print('break!')
                     break
             if count > max_count:
-                print('count : {}'.format(count))
+                # print('count : {}'.format(count))
                 max_count = count
-                print('max_count : {}'.format(max_count))
+                # print('max_count : {}'.format(max_count))
                 # print('max_count : {}'.format(max_count))
                 count = 0
                 break

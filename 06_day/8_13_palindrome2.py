@@ -3,13 +3,12 @@
 
 
 
-for i in range(1, 2):
+for i in range(1, 11):
+    max_count = 0
     t = int(input())
     p_list = []
     for j in range(100):
         p_list.append(input())
-
-    max_count = 0
 
     for j in range(0, len(p_list)):  # 행 도는 j 0~9
         for k in range(0, len(p_list[0])):  # 인덱스 찾는 k 0~9
@@ -19,10 +18,7 @@ for i in range(1, 2):
                     # print(j, k, l ,m)
                    # print(f' 가로 {j}, {k + m}, {j}, {l + k - m - 1}')
                     if p_list[j][k + m] == p_list[j][l + k - m - 1]:  # k = 0 l = 10-0
-                        if count < (l + k - m - 1) - (k + m) + 1:
-                            count = (l + k - m - 1) - (k + m) + 1
-                        if count < max_count:
-                            break
+                        count += 1
 
                         # print('max_count : {}'.format(max_count))
                     else:
@@ -38,6 +34,7 @@ for i in range(1, 2):
                     break
 
     print(max_count)
+
     for j in range(0, len(p_list)):  # 행 도는 j 0~9
         for k in range(0, len(p_list[0])):  # 인덱스 찾는 k 0~9
             for l in range(len(p_list[0]) - k, k, -1):
@@ -46,10 +43,11 @@ for i in range(1, 2):
                     # print(j, k, l ,m)
                     #print(f' 가로 {j}, {k + m}, {j}, {l + k - m - 1}')
                     if p_list[k + m][j] == p_list[l + k - m - 1][j]:  # k = 0 l = 10-0
-                        if count < (l + k - m - 1) - (k + m) + 1:
-                            count = (l + k - m - 1) - (k + m) + 1
-                        if count < max_count:
-                            break
+                        # if count < (k + m) - (l + k - m - 1)  + 1:
+                        #     count = (k + m) - (l + k - m - 1) + 1
+                        # if count > max_count:
+                        #     break
+                        count +=1
                         # print('max_count : {}'.format(max_count))
                     else:
                         count = 0
@@ -62,7 +60,7 @@ for i in range(1, 2):
                     # print('max_count : {}'.format(max_count))
                     count = 0
                     break
-
+    print('final : {}'.format(max_count))
     '''
     0 0 0 99
     0 1 0 98
