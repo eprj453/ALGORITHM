@@ -2,11 +2,11 @@ n = int(input())
 n_list = list(map(int, input().split()))
 m = int(input())
 m_list = list(map(int, input().split()))
-n_list = sorted(n_list)
+n_list.sort()
 ans = ''
 for num in m_list:
     n_start = 0
-    n_end = n
+    n_end = n-1
     result = False
     while n_start <= n_end:
         n_mid = (n_start + n_end) // 2

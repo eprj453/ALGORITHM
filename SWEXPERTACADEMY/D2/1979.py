@@ -122,7 +122,7 @@ for i in range(1, t+1):
     #         if puzzle_list[n][o] == 1 and puzzle_list[n+1][o] == 1 and puzzle_list[n+2][o] == 1:
     #             count += 1
 
-    print('#{} {}'.format(i, count))
+    # print('#{} {}'.format(i, count))
 
 # string = []
 # list1 = []

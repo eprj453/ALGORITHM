@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # # temp_list = [1,2,3,4,5,6,7,8]
 # # temp_list2 = []
 # # count_list = []
@@ -115,3 +116,6 @@ for j in range(0, len(p_list)): # 행 도는 j 0~9
 #                 if p_list[j][k] == p_list[j][m+l]:
 
 print('final : {}'.format(max_count))
+=======
+print(0 % 20)
+>>>>>>> 50d6ef88323530122dc63b0c2f712b1d3592bb07
