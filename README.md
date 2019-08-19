@@ -36,7 +36,7 @@ SWEXPERTACADEMY 4012번 요리사 풀이 완료
 
 백준 2110 공유기 풀이 완료.
 
-##### 2019년 8월 19일
+##### 2019년 8월 17일
 
 백준 10815 리스트 sort 메소드로 시간초과 해결 후 풀이 완료
 
@@ -46,3 +46,6 @@ SWEXPERTACADEMY 4012번 요리사 풀이 완료
 
 SWEXPERTACADEMY 2805 농작물 수확 풀이 완료
 
+##### 2019년 8월 19일
+
+SWEXPERTACADEMY ladder, ladder2 풀이 완료
