@@ -3,12 +3,131 @@ sys.stdin = open('작업순서_input.txt', 'r')
 
 for i in range(1, 11):
     v, e = map(int, input().split())
+    # print(v)
     line_list = list(map(int, input().split()))
-
-    dot_list, target_list = [], []
+    matrix = []
+    target_list = []
+    for j in range(v+1):
+        temp = []
+        matrix.append(temp)
+    # print(matrix)
     for j in range(len(line_list) // 2):
-        dot_list.append(line_list[j*2])
+        matrix[line_list[j*2]].append(line_list[(j*2)+1])
         target_list.append(line_list[(j*2)+1])
+    # print(matrix)
+    # print(len(target_list))
+    # print(matrix)
+    # print(target_list)
+
+    stack = []
+    visited = []
+    ans_list = []
+    for j in range(v+1):
+        temp = 0
+        visited.append(temp)
+    print('target_list : {}'.format(target_list))
+    print('matrix : {}'.format(matrix))
+    for num in range(1, v+1): # node 중 가리켜지는 edge가 없는 node 탐색
+        if not visited[num]: # 방문한적이 없다면
+            stack.append(num)
+            visited[num] = 1
+        
+
+    #     if num not in target_list:
+    #         stack.append(num) #
+    #         visited[num] = 1
+    #         while len(stack) > 0: # stack의 길이가 0이 될때까지 반복
+    #             if not visited[stack[-1]] == 1:
+    #                 visited[stack]
+    #             print('stack : {}'.format(stack))
+    #             visited[stack[-1]] = 1  # 방문 완료
+    #             ans_list.append()
+    #             if len(matrix[stack[-1]]) == 0: # 방문해서 갔는데 가리키고 있는 node가 없다면?
+    #                 stack.pop() # 스택에서 빼버린다.
+    #             #     print('stack : {}'.format(stack))
+    #             # print('pos : {}'.format(pos))
+    #             print(len(matrix[stack[-1]]))
+    #             for j in range(len(matrix[stack[-1]])): # 가리키고 있는 node 탐색, 가리키고 있는 node가 없다면(길이가 0이라면) 돌지 않는다.
+    #                 if visited[matrix[stack[-1]][j]] == 0: # 만약 아직 방문하지 않은 node라면?
+    #                     visited[matrix[stack[-1]][j]] = 1 # 방문 완료
+    #                     stack.append(matrix[stack[-1]][j]) # 스택에 추가
+    #                     break # 탈출
+    #
+    #             if visited[stack[-1]] == 1:
+    #                 stack.pop()
+    #
+    #
+    # print('ans_list : {}'.format(ans_list))
+            # print('stack : {}'.format(stack))
+            # print('ans_list in {}'.format(pos))
+            # print('ans_list : {}'.format(ans_list))
+            # if len(matrix[pos]) == 0: # 가리키고 있는 node가 없을 경우 stack에서 pop.
+            #     stack.pop()
+            #     # print('stack : {}'.format(stack))
+            #     if len(stack) != 0:
+            #         pos = stack[-1]
+            # for j in range(len(matrix[pos])): # 가리키고 있는 node 탐색.
+            #     if visited[matrix[pos][j]] != 1:
+            #         visited[matrix[pos][j]] = 1
+            #         # print('visited : {}'.format(visited))
+            #         if matrix[pos][j] not in ans_list:
+            #             ans_list.append(matrix[pos][j])
+            #         # print('ans_list in {}'.format(matrix[pos][j]))
+            #         # print('ans_list : {}'.format(ans_list))
+            #         stack.append(matrix[pos][j])
+            #         # print('stack : {}'.format(stack))
+            #         break
+            #     # elif visited[matrix[pos][j]] == 1:
+            #     #     stack.pop()
+            #         # print('stack : {}'.format(stack))
+            #
+            # if len(stack) == 0:
+            #     break
+
+
+        # while len(stack) > 0:
+        #     pos = stack[-1]
+        #     if len(matrix[pos]) > 0:
+        #         for k in range(matrix[pos]):
+        #             if visited[matrix[pos][k]] != 1:
+        #                 stack.append(matrix[pos][k])
+        #                 visited[matrix[pos][k]] = 1
+        #     else:
+        #         stack.pop()
+        #     # if len(matrix[pos]) > 0:
+
+
+
+
+
+
+    # for
+    # print(matrix)
+    # print(line_list)
+    # matrix = [[0]]*v
+    # print(matrix)
+    # for j in range(len(line_list)):
+    #     matrix[line_list[j][0]].append(line_list[j][1])
+    #     if 0 in matrix[line_list[j]]:
+    #         matrix[line_list[j]].remove(0)
+    # print(matrix)
+
+
+    # for j in range(v+1):
+    #     temp = [0]*v
+    #     matrix.append(temp)
+    # for j in range(e):
+    #     row, col = map(int, input().split())
+    #     matrix[row-1].append(col)
+    #     if 0 in matrix[row]:
+    #         matrix[row].remove(0)
+    # print(matrix)
+    # while True:
+
+
+
+
+
 
 
 
