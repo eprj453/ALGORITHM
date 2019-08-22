@@ -1,18 +1,22 @@
-import sys
-sys.stdin = open('작업순서_input.txt', 'r')
+# import sys
+# sys.stdin = open('작업순서_input.txt', 'r')
 
 for i in range(1, 11):
     v, e = map(int, input().split())
     # print(v)
     line_list = list(map(int, input().split()))
     matrix = []
+    rev_matrix = []
     target_list = []
     for j in range(v+1):
         temp = []
+        temp2 = []
         matrix.append(temp)
+        rev_matrix.append(temp2)
     # print(matrix)
     for j in range(len(line_list) // 2):
         matrix[line_list[j*2]].append(line_list[(j*2)+1])
+        rev_matrix[line_list[(j*2)+1]].append(line_list[j*2])
         target_list.append(line_list[(j*2)+1])
     # print(matrix)
     # print(len(target_list))
@@ -20,25 +24,140 @@ for i in range(1, 11):
     # print(target_list)
 
     stack = []
-    visited = []
+    visited = [False] * (v+1)
     ans_list = []
-    for j in range(v+1):
-        temp = 0
-        visited.append(temp)
-    print('target_list : {}'.format(target_list))
-    print('matrix : {}'.format(matrix))
-    for num in range(1, v+1): # node 중 가리켜지는 edge가 없는 node 탐색
-        if not visited[num]: # 방문한적이 없다면
-            stack.append(num)
-            visited[num] = 1
-        
+    print(matrix)
+    print(rev_matrix)
 
-    #     if num not in target_list:
-    #         stack.append(num) #
-    #         visited[num] = 1
-    #         while len(stack) > 0: # stack의 길이가 0이 될때까지 반복
-    #             if not visited[stack[-1]] == 1:
-    #                 visited[stack]
+    # for pos in range(1, v+1):
+    #     if visited[pos] == False:
+    #         result = True
+    #         for k in range(len(rev_matrix[pos])): # 현재 위치를 노리고 있는 해결되지 않은 node가 있는가
+    #             if visited[rev_matrix[pos][k]] == False:
+    #                 result = False
+    #                 break
+    #         if not pos in ans_list and result == True:
+    #             stack.append(pos)
+    #             visited[pos] = True
+    #             ans_list.append(pos)
+    #
+    #         for search in range(len(matrix[pos])):
+    #             search = pos # 찾는 위치를 현재 위치로
+    #             while len(stack) > 0: # 스택이 빌 때까지 반복
+
+
+
+
+
+    for num in range(1, v+1):
+        # print('num : {}'.format(num))
+        if visited[num] == False:
+            result = True
+            for k in rev_matrix[num]: # num을 노리고 있는 방문한 적 없는 node가 있는지 확인.
+                if visited[k] == False:
+                    result = False
+                    break
+            if not num in ans_list and result == True:
+                stack.append(num)  #
+                print('초기 stack : {}'.format(stack))
+                visited[num] = True
+                print('{} > true'.format(num))
+                ans_list.append(str(num))
+            print('num : {}'.format(num))
+            while len(stack) > 0:
+                pos = num
+                for j in range(len(matrix[pos])):
+                    print('확인 : {}'.format(matrix[pos][j]))
+                    result2 = True
+                    if visited[matrix[pos][j]] == False:
+                        for k in rev_matrix[num]:
+                            if visited[k] == False:
+                                result2 = False
+                                break
+                    if pos not in ans_list and result2 == True:
+                        stack.append(matrix[pos][j])
+                        print('stack 추가 : {}'.format(stack))
+                        num = matrix[pos][j]
+                        print('num 변경. {}'.format(num))
+                        visited[matrix[pos][j]] = True
+                        print('{} > true'.format(matrix[pos][j]))
+                        ans_list.append(str(num))
+                    break
+                print('pos : {}, num : {}'.format(pos,num))
+                if pos == num: # num이 바뀌지 않았다면(탐색 가능한 node가 없었다면)
+                    num = stack.pop()
+                    print('{} out of stack'.format(num))
+    print('#{} {}'.format(i, ' '.join(ans_list)))
+
+# for i in range(1, 11):
+#     v, e = map(int, input().split())
+#     # print(v)
+#     line_list = list(map(int, input().split()))
+#     matrix = []
+#     rev_matrix = []
+#     target_list = []
+#     for j in range(v+1):
+#         temp = []
+#         temp2 = []
+#         matrix.append(temp)
+#         rev_matrix.append(temp2)
+#     # print(matrix)
+#     for j in range(len(line_list) // 2):
+#         matrix[line_list[j*2]].append(line_list[(j*2)+1])
+#         rev_matrix[line_list[(j*2)+1]].append(line_list[j*2])
+#         target_list.append(line_list[(j*2)+1])
+#     # print(matrix)
+#     # print(len(target_list))
+#     # print(matrix)
+#     # print(target_list)
+#
+#     stack = []
+#     visited = [False] * (v+1)
+#     ans_list = []
+#     # for j in range(v+1):
+#     #     temp = 0
+#     #     visited.append(temp)
+#     # print('target_list : {}'.format(target_list))
+#     # print('matrix : {}'.format(matrix))
+#     # print(matrix)
+#     # print(rev_matrix)
+#     range_list = list(range(1, v+1))
+#     while len(ans_list) < v:
+#         for num in range_list: # node 중 가리켜지는 edge가 없는 node 탐색
+#             if visited[num] == False:
+#                 result = True
+#                 for k in rev_matrix[num]:
+#                     if visited[k] == False:
+#                         result = False
+#                         break
+#                 if num not in ans_list and result == True:
+#                     stack.append(num)  #
+#                     visited[num] = 1
+#                     ans_list.append(str(num))
+#                     range_list.remove(num)
+#                 # print('stack : {}'.format(stack))
+#                 while len(stack) > 0: # stack의 길이가 0이 될때까지 반복
+#                     pos = num  # 현재 위치 표시
+#                     for j in range(len(matrix[pos])):
+#                         if visited[matrix[pos][j]] == False: # 방문한 적이 없다면
+#                             stack.append(matrix[pos][j])
+#                             # print('stack : {}'.format(stack))
+#                             num = matrix[pos][j]
+#                             visited[matrix[pos][j]] = True
+#                             result2 = True
+#                             for k in rev_matrix[num]:
+#                                 if visited[k] == False:
+#                                     result2 = False
+#                                     break
+#                             if num not in ans_list and result2 == True:
+#                                 ans_list.append(str(num))
+#                                 range_list.remove(num)
+#                             break
+#                     if pos == num:
+#                         pos = stack.pop()
+#                         # print('stack : {}'.format(stack))
+#     print(len(ans_list))
+#     print('#{} {}'.format(i, ' '.join(ans_list)))
     #             print('stack : {}'.format(stack))
     #             visited[stack[-1]] = 1  # 방문 완료
     #             ans_list.append()
@@ -55,7 +174,7 @@ for i in range(1, 11):
     #
     #             if visited[stack[-1]] == 1:
     #                 stack.pop()
-    #
+    # #
     #
     # print('ans_list : {}'.format(ans_list))
             # print('stack : {}'.format(stack))
