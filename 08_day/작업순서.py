@@ -3,14 +3,64 @@ sys.stdin = open('작업순서_input.txt', 'r')
 
 for i in range(1, 11):
     v, e = map(int, input().split())
+    # print(v)
     line_list = list(map(int, input().split()))
-
-    dot_list, target_list = [], []
+    matrix = []
+    rev_matrix = []
+    target_list = []
+    for j in range(v+1):
+        temp = []
+        temp2 = []
+        matrix.append(temp)
+        rev_matrix.append(temp2)
+    # print(matrix)
     for j in range(len(line_list) // 2):
-        dot_list.append(line_list[j*2])
+        matrix[line_list[j*2]].append(line_list[(j*2)+1])
+        rev_matrix[line_list[(j*2)+1]].append(line_list[j*2])
         target_list.append(line_list[(j*2)+1])
+    # print(matrix)
+    # print(len(target_list))
+    # print(matrix)
+    # print(target_list)
 
+    stack = []
+    visited = [False] * (v+1)
+    ans_list = []
+    print('rev_matrix', rev_matrix)
+    print('matrix', matrix)
+    # print(visited)
+    #
+    # while len(ans_list) < v:
+    for num in range(1, v+1):
 
+        if visited[num] == False:
+            # stack.append(num)  #
+            # visited[num] = True
+            result = True
+            if num not in ans_list and result == True:
+                stack.append(num)  #
+                visited[num] = True
+                ans_list.append(str(num))
+
+                while len(stack) > 0:
+                    pos = num
+                    for j in range(len(matrix[pos])):
+                        if visited[matrix[pos][j]] == False:
+                            stack.append(matrix[pos][j])
+                            num = matrix[pos][j]
+                            result = True
+                            for k in rev_matrix[num]:
+                                if visited[k] == False:
+                                    result = False
+                                    break
+                            if num not in ans_list and result == True:
+                                visited[matrix[pos][j]] = True
+                                ans_list.append(str(num))
+                            break
+                    if pos == num:
+                        num = stack.pop()
+    print(len(ans_list))
+    print('#{} {}'.format(i, ' '.join(ans_list)))
 
 
 

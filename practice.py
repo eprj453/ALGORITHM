@@ -1,5 +1,10 @@
-list1 = [1,2,3,[4,5]]
+word = 'asdasd'
+word_list = []
+# for i in range(len(word)):
+#     word_list.append(word[i])
+# print(word_list)
 
-list1[3] = [5,6]
-list1.pop(1)
-print(list1)
+for i in range(len(word)):
+    word_list.append(word[i].upper())
+
+print(word_list)
