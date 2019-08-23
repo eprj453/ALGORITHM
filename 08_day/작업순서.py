@@ -1,5 +1,5 @@
-# import sys
-# sys.stdin = open('작업순서_input.txt', 'r')
+import sys
+sys.stdin = open('작업순서_input.txt', 'r')
 
 for i in range(1, 11):
     v, e = map(int, input().split())
@@ -26,45 +26,43 @@ for i in range(1, 11):
     stack = []
     visited = [False] * (v+1)
     ans_list = []
-<<<<<<< HEAD
+
     print('rev_matrix', rev_matrix)
     print('matrix', matrix)
     # print(visited)
-    #
-    # while len(ans_list) < v:
-    for num in range(1, v+1):
+#     #
+#     # while len(ans_list) < v:
+#     for num in range(1, v+1):
+#
+#         if visited[num] == False:
+#             # stack.append(num)  #
+#             # visited[num] = True
+#             result = True
+#             if num not in ans_list and result == True:
+#                 stack.append(num)  #
+#                 visited[num] = True
+#                 ans_list.append(str(num))
+#
+#                 while len(stack) > 0:
+#                     pos = num
+#                     for j in range(len(matrix[pos])):
+#                         if visited[matrix[pos][j]] == False:
+#                             stack.append(matrix[pos][j])
+#                             num = matrix[pos][j]
+#                             result = True
+#                             for k in rev_matrix[num]:
+#                                 if visited[k] == False:
+#                                     result = False
+#                                     break
+#                             if num not in ans_list and result == True:
+#                                 visited[matrix[pos][j]] = True
+#                                 ans_list.append(str(num))
+#                             break
+#                     if pos == num:
+#                         num = stack.pop()
+#     print(len(ans_list))
+#     print('#{} {}'.format(i, ' '.join(ans_list)))
 
-        if visited[num] == False:
-            # stack.append(num)  #
-            # visited[num] = True
-            result = True
-            if num not in ans_list and result == True:
-                stack.append(num)  #
-                visited[num] = True
-                ans_list.append(str(num))
-
-                while len(stack) > 0:
-                    pos = num
-                    for j in range(len(matrix[pos])):
-                        if visited[matrix[pos][j]] == False:
-                            stack.append(matrix[pos][j])
-                            num = matrix[pos][j]
-                            result = True
-                            for k in rev_matrix[num]:
-                                if visited[k] == False:
-                                    result = False
-                                    break
-                            if num not in ans_list and result == True:
-                                visited[matrix[pos][j]] = True
-                                ans_list.append(str(num))
-                            break
-                    if pos == num:
-                        num = stack.pop()
-    print(len(ans_list))
-    print('#{} {}'.format(i, ' '.join(ans_list)))
-=======
-    print(matrix)
-    print(rev_matrix)
 
     # for pos in range(1, v+1):
     #     if visited[pos] == False:
@@ -285,8 +283,6 @@ for i in range(1, 11):
 
 
 
-
->>>>>>> 2557f2538c37d0726fc1ea5c034d67dad95587a6
 
 
 
