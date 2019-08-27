@@ -49,3 +49,13 @@ SWEXPERTACADEMY 2805 농작물 수확 풀이 완료
 ##### 2019년 8월 19일
 
 SWEXPERTACADEMY ladder, ladder2 풀이 완료
+
+##### 2019년 8월 25일
+
+SWEXPERACADEMY 1267번(작업순서, DFS/BFS) 매우 고전중
+
+백준 1260번 DFS와 BFS 풀이 완료
+
+백준 2178번 미로탐색 풀이 완료(BFS)
+
+백준 2628번 종이자르기 풀이 완료
