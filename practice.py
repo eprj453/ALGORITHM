@@ -1,15 +1,3 @@
-<<<<<<< HEAD
-word = 'asdasd'
-word_list = []
-# for i in range(len(word)):
-#     word_list.append(word[i])
-# print(word_list)
+list1 = [1,2,3,4,5,6,7,8]
 
-for i in range(len(word)):
-    word_list.append(word[i].upper())
-
-print(word_list)
-=======
-for i in range(0):
-    print('a')
->>>>>>> 2557f2538c37d0726fc1ea5c034d67dad95587a6
+print(list1[4:8])
