@@ -1,9 +1,5 @@
 
 
-list1 = [1,2,3,4,5,6,7]
-print(list1[0:3])
-
-list1 = [1,2,3,4,5,6,7,8]
-
-print(list1[4:8])
-
+list1 = [1,2,3,4]
+list1.insert(4, list1.pop(0))
+print(list1)

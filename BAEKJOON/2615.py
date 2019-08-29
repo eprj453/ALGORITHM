@@ -8,10 +8,6 @@ for i in range(1, 20):
     baduk[i].insert(0, '0')
     baduk[i].insert(20, '0')
 
-print(len(baduk))
-print(len(baduk[1]))
-print(baduk)
-#
 
 dx, dy = [-1, -1, -1, 0, 1, 1, 1, 0], [-1, 0, 1, 1, 1, 0 ,-1, -1]
 
@@ -26,7 +22,7 @@ for i in range(1, 20):
         if win != '':
             break
         if baduk[i][j] == '1' or baduk[i][j] == '2':
-            print('found : ', i, j)
+            # print('found : ', i, j)
             ans = [i, j]
             ch = baduk[i][j]
             for k in range(len(dx)):
@@ -45,7 +41,7 @@ for i in range(1, 20):
                             win = ch
                             win_coop = ans
                             win_coop2 = [i + (4*x), j + (4*y)]
-                            print('win : ', win_coop)
+                            # print('win : ', win_coop)
                             break
 if win == '':
     print('0')
