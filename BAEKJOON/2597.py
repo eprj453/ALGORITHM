@@ -6,7 +6,7 @@ yellow = sorted(list(map(int, input().split())))
 start, end = 0, length
 center = (round(start, 1)+round(end, 1)) / 2
 red_center = (round(red[0], 1) + round(red[1], 1)) / 2
-
+print(center)
 if red_center > center:
     end = red_center
     for i in range(2):
