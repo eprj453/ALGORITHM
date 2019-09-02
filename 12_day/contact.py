@@ -33,4 +33,5 @@ for i in range(1, 11):
             if temp[j][0] > max_val2:
                 max_val2 = temp[j][0]
 
-    print('#{} {}'.format(i, max_val2))
+    print('#{} {}'.format(i, max_val))
+    # print('#{} {}'.format(i, max_val2))
