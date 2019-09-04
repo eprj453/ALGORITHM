@@ -99,10 +99,10 @@ for i in range(1, t+1):
     while num < l_list.nodeCount+1:
         if num > l_list.nodeCount - 10:
             # print(curr.data, end = ' ')
-            ans.insert(0, str(curr.data))
+            ans.append(curr.data)
         curr = curr.next
         num += 1
-    print('#{} {}'.format(i, ' '.join(ans)))
+    print('#{} {}'.format(i, ' '.join(map(str, reversed(ans)))))
     # print('#{} '.format(i), end = '')
     # num = 0
     # while l_list.next != None:
