@@ -1,15 +1,21 @@
-n = int(input())
-sche = []
-can_sche = []
-stack = []
-for i in range(n):
-    sche.append(list(map(int, input().split())))
-
-
-for i in range(n):
-    if sche[i][0] + i > n:
-        continue
+def resign(day, money):
+    global max_money
+    if day >= n:
+        max_money = max(max_money, money)
+        return
+    if day + time[day] <= n: # 상담 가능한 경우
+        resign(day + time[day], money + pay[day]) # 상담한다
+        resign(day+1, money) # 안하고 skip
     else:
-        stack.append(sche[i])
-        
+        resign(day+1, money) # 상담 불가능한 경우
 
+n = int(input())
+time = []
+pay = []
+for i in range(n):
+    t, p = map(int, input().split())
+    time.append(t)
+    pay.append(p)
+max_money = 0
+resign(0, 0)
+print(max_money)

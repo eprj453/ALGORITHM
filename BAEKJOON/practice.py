@@ -1,4 +1,6 @@
-list1 = [0,1,[2,3]]
-list1.append(4,5)
+list1 = [[1,2], [3,4], [5,6], [7,8]]
 
-print(list1)
+if [1,3] in list1:
+    print('있다')
+else:
+    print('none')
