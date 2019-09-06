@@ -17,12 +17,9 @@ def check_sudoku(sudoku_list):
 
 t = int(input())
 for i in range(1, t+1):
-    sudoku_list = []
+    sudoku_list = [list(map(int, input().split())) for _ in range(9)]
     sudoku_list2 = []
     sudoku_list3 = []
-
-    for j in range(9):
-        sudoku_list += [list(map(int, input().split()))]
 
     for j in range(9):
         temp = []
