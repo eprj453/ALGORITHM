@@ -12,7 +12,6 @@ def search(k, start):
 
 def check(temp):
     distance_sum = 0
-    # dx, dy = [-1, 1, 0, 0], [0, 0, -1, 1]
     for i in range(n):
         for j in range(n):
             if city[i][j] == '1':
