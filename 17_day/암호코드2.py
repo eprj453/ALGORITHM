@@ -1,35 +1,84 @@
 import sys
 sys.stdin = open('2_input.txt', 'r')
 
+# my_dict = {'0': [3, 2, 1, 1], '1': [2, 2, 2, 1], '2': [2, 2, 1, 2], '3': [1, 4, 1, 1], '4': [1, 1, 3 ,2],
+#            '5': [1, 2, 3, 1], '6': [1, 1, 1, 4], '7': [1, 3, 1, 2], '8': [1, 2, 1, 3], '9': [3, 1, 1, 2]
+#            }
+my_dict = {'3221': 0, '2221': 1, '2212': 2, '1411': 3, '1132': 4,
+           '1231': 5, '1114': 6, '1312': 7, '1213': 8, '3112': 9
+            }
+my_dict2 = {'0': '0000', '1': '0001', '2': '0010', '3': '0011', '4': '0100',
+           '5' : '0101', '6': '0110', '7': '0111', '8': '1000', '9': '1001',
+           'A' : '1010', 'B': '1011', 'C': '1100', 'D': '1101', 'E': '1110', 'F': '1111'
+            }
 
 for i in range(1, int(input())+1):
-    print('--------{}--------'.format(i))
     n, m = map(int, input().split())
     codes = [list(input()) for _ in range(n)]
-    # print(codes)
     for j in range(n):
         for k in range(m):
             if codes[j][k] != '0':
-                # print(j, k)
+                temp = []
                 x, y = j, k
-                # print(x, y)
-                ch = ''
-                while True:
-                    if y >= m:
+                o = 0
+                for l in range(m-1, -1, -1):
+                    if codes[x][l] != '0':
+                        o = l
+                        for p in range(y, o+1):
+                            if len(temp) >= 4 and temp[-1] == '0' and temp[-2] == '0' and temp[-3] == '0' and temp[-4] == '0':
+                                break
+                            # else:
+                            temp.append(codes[x][p])
                         break
-                    if codes[x][y] == '0':
-                        if y < m-3 and codes[x][y+1] == '0' and codes[x][y+2] == '0' and codes[x][y+3] == '0':
-                            break
-                    ch += str(codes[x][y])
-                    y += 1
-                print(ch)
-                x, y = j, k
-                while codes[x][y] != '0':
-                    for l in range(y, y+len(ch)):
+
+                while True:
+                    if temp[-1] != '0':
+                        break
+                    temp.pop()
+                ch = ''.join(temp)
+                # print(ch)
+                ch2 = ''
+                for c in ch:
+                    ch2 += my_dict2[c]
+                print(ch2)
+                ans = []
+                for l in range(len(ch2)-1):
+                    rate = [1]
+                    for q in range(l, len(ch2)-1):
+                        if len(rate) == 5:
+                            rate.pop()
+                            print(rate)
+                            result = False
+                            while result == False:
+                                if result == True:
+                                    break
+                                for i in range(len(rate)):
+                                    if rate[i] == 1:
+                                        result = True
+                                        break
+                                if result == False:
+                                    for i in range(len(rate)):
+                                        rate[i] = round(rate[i] // 2)
+                            if ''.join(map(str, rate)) in my_dict.keys():
+                                ans.append(my_dict[''.join(map(str, rate))])
+                                rate = [1]
+                            else:
+                                break
+                        if ch2[q] == ch2[q+1]:
+                            rate[-1] += 1
+                        else:
+                            rate.append(1)
+                print(ans)
+                x = j
+                while True:
+                    if x >= n:
+                        break
+                    if codes[x][k] == '0':
+                        break
+                    for l in range(k, o+1):
                         codes[x][l] = '0'
                     x += 1
 
-    # print(ch)
 
 
 
