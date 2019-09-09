@@ -17,7 +17,6 @@ def search(max, cctv, maps):
     global min_count
     if max >= len(cctv):
         count = 0
-        # print(maps)
         for i in range(n):
             for j in range(m):
                 if maps[i][j] == 0:
@@ -34,7 +33,6 @@ def search(max, cctv, maps):
                     for k in range(m):
                         temp[j].append(maps[j][k])
                 while 0 <= x+dx[i] < n and 0 <= y+dy[i] < m:
-                    # print(x+dx[i], y+dy[i])
                     if temp[x+dx[i]][y+dy[i]] == 6:
                         break
                     elif temp[x+dx[i]][y+dy[i]] == 0:
