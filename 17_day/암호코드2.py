@@ -4,80 +4,145 @@ sys.stdin = open('2_input.txt', 'r')
 # my_dict = {'0': [3, 2, 1, 1], '1': [2, 2, 2, 1], '2': [2, 2, 1, 2], '3': [1, 4, 1, 1], '4': [1, 1, 3 ,2],
 #            '5': [1, 2, 3, 1], '6': [1, 1, 1, 4], '7': [1, 3, 1, 2], '8': [1, 2, 1, 3], '9': [3, 1, 1, 2]
 #            }
-my_dict = {'3221': 0, '2221': 1, '2212': 2, '1411': 3, '1132': 4,
-           '1231': 5, '1114': 6, '1312': 7, '1213': 8, '3112': 9
+my_dict = {'211': 0, '221': 1, '122': 2, '411': 3, '132': 4,
+           '231': 5, '114': 6, '312': 7, '213': 8, '112': 9
             }
+my_dict_rev = {'1123': 0, '1222': 1, '2212': 2, '1141': 3, '2311': 4,
+               '1321': 5, '4111': 6, '2131': 7, '3121': 8, '2113': 9
+               }
 my_dict2 = {'0': '0000', '1': '0001', '2': '0010', '3': '0011', '4': '0100',
            '5' : '0101', '6': '0110', '7': '0111', '8': '1000', '9': '1001',
            'A' : '1010', 'B': '1011', 'C': '1100', 'D': '1101', 'E': '1110', 'F': '1111'
             }
 
+my_dict2_rev = {'0': '0000', '1': '1000', '2': '0100', '3': '1100', '4': '0010',
+           '5' : '1010', '6': '0110', '7': '1110', '8': '0001', '9': '1001',
+           'A' : '0101', 'B': '1101', 'C': '0011', 'D': '1011', 'E': '0111', 'F': '1111'
+            }
+
+
 for i in range(1, int(input())+1):
+    ans = 0
     n, m = map(int, input().split())
     codes = [list(input()) for _ in range(n)]
-    for j in range(n):
-        for k in range(m):
-            if codes[j][k] != '0':
-                temp = []
-                x, y = j, k
-                o = 0
-                for l in range(m-1, -1, -1):
-                    if codes[x][l] != '0':
-                        o = l
-                        for p in range(y, o+1):
-                            if len(temp) >= 4 and temp[-1] == '0' and temp[-2] == '0' and temp[-3] == '0' and temp[-4] == '0':
-                                break
-                            # else:
-                            temp.append(codes[x][p])
-                        break
+    x = 0
+    while x < len(codes):
+        y = 0
+        while y < len(codes[x]):
+            if codes[x][y] != '0':
+                p = codes[x].pop(y)
+                c = 0
+                for i in range(len(my_dict2[p])):
+                    codes[x].insert(y+c, my_dict2[p][i])
+                    c += 1
+                y += len(my_dict2[p])
+            else:
+                y += 1
+        x += 1
 
-                while True:
-                    if temp[-1] != '0':
-                        break
-                    temp.pop()
-                ch = ''.join(temp)
+    code, rate = [], [1]
+    boolean = False
+    for j in range(n):
+        for k in range(len(codes[j])-1, -1, -1):
+            if len(code) == 8:
+                print('--------count---------')
+                if (((code[0] + code[2] + code[4] + code[6]) * 3) + (code[1] + code[3] + code[5]) + code[7]) % 10 == 0:
+                    ans += sum(code)
+                code = []
+            if len(rate) == 3 and codes[j][k] != codes[j][k-1]:
+                print(rate)
+                if my_dict.get(''.join(map(str, rate))) != None:
+                    print('insert')
+                    code.insert(0, my_dict[''.join(map(str, rate))])
+                rate = [1]
+                boolean = False
+            if boolean == True:
+                if codes[j][k] == codes[j][k-1]:
+                    rate[0] += 1
+                else:
+                    rate.insert(0, 1)
+            if boolean == False and len(codes[j]) > len(codes[j-1]) and codes[j][k] == '1':
+                print('find :',j, k)
+                boolean = True
+                if codes[j][k] == codes[j][k-1]:
+                    rate[0] += 1
+                else:
+                    rate.insert(0, 1)
+
+    print(ans)
+
+    for j in range(len(codes)):
+        print(codes[j])
+
+            # for l in range(len(codes[j][k])):
+            #     if codes[j][k][l] != '1':
+            #         code = []
+            #         while len(code) < 8:
+
+
+
+    # for j in range(n):
+    #     print(codes[j])
+        # for k in range(m-1, -1, -1):
+        #     if codes[j][k] != '0' and codes[j-1][k] == '0':
+        #         rate = []
+
+
+                # temp = []
+                # x, y = j, k
+                # o = 0
+                # for l in range(m-1, -1, -1):
+                #     if codes[x][l] != '0' and codes[x-1][l] == '0':
+                #         o = l
+                #         for p in range(y, o+1):
+                #             if len(temp) >= 4 and temp[-1] == '0' and temp[-2] == '0' and temp[-3] == '0' and temp[-4] == '0':
+                #                 break
+                #             # else:
+                #             temp.append(codes[x][p])
+                #         break
+                #
+                # while True:
+                #     if temp[-1] != '0':
+                #         break
+                #     temp.pop()
+                # ch = ''.join(temp)
+                # # print(ch)
+                # ch2 = ''
+                # for c in ch:
+                #     ch2 += my_dict2[c]
+                # ans = []
+                # for l in range(len(ch2)-1):
+                #     rate = [1]
+                #     print(ch2)
+                #     for q in range(l, len(ch2)-1):
+                #         if len(rate) == 4 and ch2[q] != ch2[q+1]:
+                #             # print(rate)
+                #             min_val = min(rate)
+                #             result = False
+                #             while result == False:
+                #                 if result == True:
+                #                     break
+                #                 for r in range(len(rate)):
+                #                     if rate[r] == 1:
+                #                         result = True
+                #                         break
+                #                 if result == False:
+                #                     for s in range(len(rate)):
+                #                         rate[s] = round(rate[s] // min_val)
+                #             print(rate)
+                #             if ''.join(map(str, rate)) in my_dict.keys():
+                #                 ans.append(my_dict[''.join(map(str, rate))])
+                #                 rate = [1]
+                #             else:
+                #                 rate = [1]
+                #                 break
+                #         elif ch2[q] == ch2[q+1]:
+                #             rate[-1] += 1
+                #         else:
+                #             rate.append(1)
                 # print(ch)
-                ch2 = ''
-                for c in ch:
-                    ch2 += my_dict2[c]
-                print(ch2)
-                ans = []
-                for l in range(len(ch2)-1):
-                    rate = [1]
-                    for q in range(l, len(ch2)-1):
-                        if len(rate) == 5:
-                            rate.pop()
-                            print(rate)
-                            result = False
-                            while result == False:
-                                if result == True:
-                                    break
-                                for i in range(len(rate)):
-                                    if rate[i] == 1:
-                                        result = True
-                                        break
-                                if result == False:
-                                    for i in range(len(rate)):
-                                        rate[i] = round(rate[i] // 2)
-                            if ''.join(map(str, rate)) in my_dict.keys():
-                                ans.append(my_dict[''.join(map(str, rate))])
-                                rate = [1]
-                            else:
-                                break
-                        if ch2[q] == ch2[q+1]:
-                            rate[-1] += 1
-                        else:
-                            rate.append(1)
-                print(ans)
-                x = j
-                while True:
-                    if x >= n:
-                        break
-                    if codes[x][k] == '0':
-                        break
-                    for l in range(k, o+1):
-                        codes[x][l] = '0'
-                    x += 1
+                # print(ch2)
+                # print(ans)
 
 
 
