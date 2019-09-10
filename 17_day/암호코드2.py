@@ -50,6 +50,18 @@ for i in range(1, int(input())+1):
                     ans += sum(code)
                 code = []
             if len(rate) == 3 and codes[j][k] != codes[j][k-1]:
+                result = False
+                min_val = min(rate)
+                while result == False:
+                    if result == True:
+                        break
+                    for i in range(len(rate)):
+                        if rate[i] == 1:
+                            result = True
+                            break
+                    if result == False:
+                        for i in range(len(rate)):
+                            rate[i] = round(rate[i] // min_val)
                 print(rate)
                 if my_dict.get(''.join(map(str, rate))) != None:
                     print('insert')
