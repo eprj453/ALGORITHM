@@ -1,7 +1,7 @@
 def BFS(x, y, c, length):
     if x == n-1 and y == m-1:
         return length
- 
+
     for i in range(len(dx)):
         if 0 <= x+dx[i] < n and 0 <= y+dy[i] < m:
             if maps[x+dx[i]][y+dy[i]] == '1' and c == 1:
