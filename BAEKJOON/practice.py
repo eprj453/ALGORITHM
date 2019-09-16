@@ -158,3 +158,24 @@
 
 # print(13/100)
 
+# def perm(start, end):
+# #     if start == end:
+# #         print(temp)
+# #     else:
+# #         for i in range(n):
+# #
+# #             visited[i] = True
+# #             perm(start+1, end)
+# #             visited[i] = False
+# #
+# #
+# #
+# # list1 = [1, 2, 3, 4]
+# # n = len(list1)
+# # temp = [0] * n
+# # visited = [False] * n
+# #
+# # perm(0, n)
+
+a = 1.234
+print(len(a))
