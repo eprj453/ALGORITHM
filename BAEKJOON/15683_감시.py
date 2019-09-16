@@ -1,16 +1,4 @@
-# def perm(k, temp):
-# # #     global min_count
-# # #     if k >= l:
-# # #         maps_temp = maps
-# # #         print(temp)
-# # #         c = 0
-# # #         for i in range(n):
-# # #             for j in range(m):
-# # #                 if visited[i][j] == False and maps[i][j] != 0 and maps[i][j] != 6:
-# # #                     visited[i][j] == True
-# # #                     x, y = i, j
-# # #                     for
-# # #
+
 
 
 def search(max, cctv, maps):
