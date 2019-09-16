@@ -1,6 +1,7 @@
 def BFS(x, y, c, length):
     if x == n-1 and y == m-1:
         return length
+<<<<<<< HEAD
     print(x, y)
     dx, dy = [-1, 1, 0, 0], [0, 0, -1, 1]
     # for i in range(len(dx)):
@@ -9,6 +10,18 @@ def BFS(x, y, c, length):
         BFS(x + dx[0], y + dy[0], c - 1, length + 1)
     if 0 <= x+dx[0] < n and 0 <= y+dy[0] < m and maps[x+dx[0]][y+dy[0]] == '0':
         BFS(x + dx[0], y + dy[0], c, length + 1)
+=======
+
+    for i in range(len(dx)):
+        if 0 <= x+dx[i] < n and 0 <= y+dy[i] < m:
+            if maps[x+dx[i]][y+dy[i]] == '1' and c == 1:
+                BFS(x + dx[i], y + dy[i], c - 1, length + 1)
+            elif maps[x+dx[i]][y+dy[i]] == '1' and c == 0:
+                return -1
+            elif maps[x+dx[i]][y+dy[i]] == '0':
+                # result = True
+                BFS(x+dx[i], y+dy[i], c, length+1)
+>>>>>>> 813cf371b0e0eb7d9d7a3a5b093105a6e52b7511
 
     if 0 <= x + dx[1] < n and 0 <= y + dy[1] < m and maps[x + dx[1]][y + dy[1]] == '1' and c == 1:
         BFS(x + dx[1], y + dy[1], c - 1, length + 1)
