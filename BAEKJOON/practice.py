@@ -177,5 +177,6 @@
 # #
 # # perm(0, n)
 
-a = 1.234
-print(len(a))
+list1 = [[1,2],[3,4]]
+if [1,2] in list1:
+    print(True)
