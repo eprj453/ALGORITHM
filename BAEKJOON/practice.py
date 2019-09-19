@@ -177,6 +177,34 @@
 # #
 # # perm(0, n)
 
-list1 = [[1,2],[3,4]]
-if [1,2] in list1:
-    print(True)
+# list1 = [[1,2],[3,4]]
+# if [1,2] in list1:
+#     print(True)
+
+
+
+def perm(s, e):
+    global count
+    if s == len(temp):
+        print(temp)
+        count += 1
+        return
+    else:
+        for i in range(n):
+            if visited[i]: continue
+            else:
+                temp[s] = arr[i]
+                visited[i] = True
+                perm(s+1, e)
+                visited[i] = False
+
+
+
+arr = list(range(100))
+visited = [False]*100
+n = 100
+temp = [0]*10
+count = 0
+perm(0,n)
+# count = 0
+print(count)
