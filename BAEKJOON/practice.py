@@ -210,13 +210,118 @@
 # print(count)
 
 
-visited_a, visited_b = [], []
-for i in range(3):
-    temp = [False] * 2
-    visited_a.append(temp)
-    visited_b.append(temp)
+# visited_a, visited_b = [], []
+# for i in range(3):
+#     temp = [False] * 2
+#     visited_a.append(temp)
+#     visited_b.append(temp)
+#
+# visited_a[1][1] = True
+#
+# print(visited_a)
+# print(visited_b)
 
-visited_a[1][1] = True
 
-print(visited_a)
-print(visited_b)
+# print(m)
+# print(m_1)
+# print(remain_2)
+# print(c2)
+# print()
+# print(m_2)
+# print(remain_3)
+# print(c3)
+
+
+# def perm(s, e):
+#     global count
+#     global p_list2
+#     if s == e:
+#         t = int(''.join(map(str, temp)))
+#         p_list2.append(t)
+#         return
+#     else:
+#         for i in range(len(p_list)):
+#             if visited[i]:
+#                 continue
+#             else:
+#                 temp[s] = p_list[i]
+#                 visited[i] = True
+#                 perm(s+1, e)
+#                 visited[i] = False
+#
+#
+# p_list = list(map(int, input().split()))
+# c = int(input())
+# n = len(p_list)
+# count = 0
+# temp = [0] * n
+# visited = [False] * n
+# p_list2 = []
+# perm(0, n)
+# p_list2.sort()
+# print(p_list2)
+# print(p_list2[c-1])
+
+# c = int(input())
+# seats = input().split()
+# max_count = 0
+# for s in range(len(seats)):
+#     if seats[s] == '1': continue
+#     else:
+#         c1 = 1
+#         while 0 <= s-c1 < c:
+#             if seats[s-c1] == '1':
+#                 break
+#             c1 += 1
+#         c2 = 1
+#         while 0 <= s+c2 < c:
+#             if seats[s+c2] == '1':
+#                 break
+#             c2 += 1
+#         t = min(c1, c2)
+#         max_count = max(t, max_count)
+# print(max_count)
+
+'''
+9
+1 0 0 0 0 1 1 0 0
+
+'''
+def find(m_x, m_y, c):
+    print('돈다')
+    global count
+    global min_distance
+    if m_x == cony[0] and m_y == cony[1]:
+        count += 1
+        min_distance = c
+        return
+    if m_x > cony[0] or m_y > cony[1]:
+        return
+    for i in range(len(dx)):
+        # if m_x > cony[0] or m_y > cony[1]: continue
+        if 0 <= m_x+dx[i] < paper[1]+1 and 0 <= m_y+dy[i] < paper[0]+1:
+            if visited[m_x+dx[i]][m_y+dy[i]] : continue
+            else:
+                visited[m_x+dx[i]][m_y+dy[i]] = True
+                print('m_x+dx[i], my_dy[i]', m_x + dx[i], m_y + dy[i])
+                find(m_x+dx[i], m_y+dy[i], c+1)
+                visited[m_x+dx[i]][m_y+dy[i]] = False
+
+
+paper = list(map(int, input().split()))
+cony = list(map(int, input().split()))
+dx, dy = [0, 1], [1, 0]
+visited = []
+for j in range(paper[1]+1):
+    temp = [False] * (paper[0]+1)
+    visited.append(temp)
+print(visited)
+count = 0
+min_distance = 0
+visited[0][0] = True
+find(0, 0, 0)
+# if count == 0 or min_distance == 0:
+#     print('fail')
+# else:
+print(count)
+print(min_distance)
