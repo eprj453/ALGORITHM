@@ -35,6 +35,6 @@ for i in range(1, int(input()) + 1):
     arr = list(range(2, n+1))
     temp = [0] * (n-1)
     visited = [False] * (n-1)
-    min_distance = 1000
+    min_distance = 10000
     perm(0, n-1)
     print("#%d %d"%(i, min_distance))
