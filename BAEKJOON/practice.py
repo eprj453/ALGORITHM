@@ -287,41 +287,45 @@
 1 0 0 0 0 1 1 0 0
 
 '''
-def find(m_x, m_y, c):
-    print('돈다')
-    global count
-    global min_distance
-    if m_x == cony[0] and m_y == cony[1]:
-        count += 1
-        min_distance = c
-        return
-    if m_x > cony[0] or m_y > cony[1]:
-        return
-    for i in range(len(dx)):
-        # if m_x > cony[0] or m_y > cony[1]: continue
-        if 0 <= m_x+dx[i] < paper[1]+1 and 0 <= m_y+dy[i] < paper[0]+1:
-            if visited[m_x+dx[i]][m_y+dy[i]] : continue
-            else:
-                visited[m_x+dx[i]][m_y+dy[i]] = True
-                print('m_x+dx[i], my_dy[i]', m_x + dx[i], m_y + dy[i])
-                find(m_x+dx[i], m_y+dy[i], c+1)
-                visited[m_x+dx[i]][m_y+dy[i]] = False
+# def find(m_x, m_y, c):
+#     print('돈다')
+#     global count
+#     global min_distance
+#     if m_x == cony[0] and m_y == cony[1]:
+#         count += 1
+#         min_distance = c
+#         return
+#     if m_x > cony[0] or m_y > cony[1]:
+#         return
+#     for i in range(len(dx)):
+#         # if m_x > cony[0] or m_y > cony[1]: continue
+#         if 0 <= m_x+dx[i] < paper[1]+1 and 0 <= m_y+dy[i] < paper[0]+1:
+#             if visited[m_x+dx[i]][m_y+dy[i]] : continue
+#             else:
+#                 visited[m_x+dx[i]][m_y+dy[i]] = True
+#                 print('m_x+dx[i], my_dy[i]', m_x + dx[i], m_y + dy[i])
+#                 find(m_x+dx[i], m_y+dy[i], c+1)
+#                 visited[m_x+dx[i]][m_y+dy[i]] = False
+#
+#
+# paper = list(map(int, input().split()))
+# cony = list(map(int, input().split()))
+# dx, dy = [0, 1], [1, 0]
+# visited = []
+# for j in range(paper[1]+1):
+#     temp = [False] * (paper[0]+1)
+#     visited.append(temp)
+# print(visited)
+# count = 0
+# min_distance = 0
+# visited[0][0] = True
+# find(0, 0, 0)
+# # if count == 0 or min_distance == 0:
+# #     print('fail')
+# # else:
+# print(count)
+# print(min_distance)
 
-
-paper = list(map(int, input().split()))
-cony = list(map(int, input().split()))
-dx, dy = [0, 1], [1, 0]
-visited = []
-for j in range(paper[1]+1):
-    temp = [False] * (paper[0]+1)
-    visited.append(temp)
-print(visited)
-count = 0
-min_distance = 0
-visited[0][0] = True
-find(0, 0, 0)
-# if count == 0 or min_distance == 0:
-#     print('fail')
-# else:
-print(count)
-print(min_distance)
+list1 = [2]
+list1 = list1[1:]
+print(list1)

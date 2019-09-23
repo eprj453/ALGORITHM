@@ -11,7 +11,6 @@ def mergeSort(lo, hi):
     # 왼쪽과 오른쪽을 병합
     print('left, right : ',arr[i], arr[j])
 
-    if
     while i <= mid and j <= hi:
         if arr[i] < arr[j]:
             tmp[k] = arr[i]
