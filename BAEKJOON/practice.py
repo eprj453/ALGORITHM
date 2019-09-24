@@ -326,6 +326,16 @@
 # print(count)
 # print(min_distance)
 
-list1 = [2]
-list1 = list1[1:]
+list1 = [[2,3,4,5,6,7,8],[9,10,11,12,13,14,15], [16,17,18,19,20,21,22]]
+n = list1[len(list1)-1]
+s = 0
+while True:
+    tmp = len(list1) if s == 0 else 0 if s == 1 else
+    for i in range(len(list1)-1, -1, -1):
+        if i == 0:
+            list1[i] = 0
+            break
+        list1[i] = list1[i-1]
+
 print(list1)
+print(n)
