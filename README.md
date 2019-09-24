@@ -112,3 +112,12 @@ SWEXPERTACADEMY 4613 러시아 국기 같은 깃발 풀이 완료
 
 백준 1405 미친 로봇 풀이 완료
 
+##### 2019년 9월 24일
+
+교육과정 Programmin - Advanced 백트래킹 풀이 완료
+
+교육과정 Programmin - Advanced 분할정복 이진탐색 제외한 풀이 완료
+
+백준 17144번 미세먼지안녕 풀이 완료
+
+교육과정 Programmin - Immediate Stack2 예전에 풀지 못했던 모든 문제 풀이 완료
