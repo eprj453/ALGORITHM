@@ -35,5 +35,4 @@
 
 # print(9//5)
 # print(9%5)
-print(0 // 3)
-print(0 % 3)
+print(5 % 6)
