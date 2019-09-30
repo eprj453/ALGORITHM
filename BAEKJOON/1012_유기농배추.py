@@ -4,7 +4,6 @@ def bfs(q):
         cnt += 1
         return
     x, y = q[0][0], q[0][1]
-    result = False
     for i in range(len(dx)):
         if 0 <= x + dx[i] < n and 0 <= y + dy[i] < m:
             if land[x+dx[i]][y+dy[i]] == 1 and visited[x+dx[i]][y+dy[i]] == False:
@@ -31,10 +30,6 @@ for i in range(1, int(input())+1):
         x, y = map(int, input().split())
         land[y][x] = 1
 
-    # for j in range(n):
-    #     print(land[j])
-    # for j in range(n):
-    #     print(visited[j])
     for j in range(n):
         for k in range(m):
             if land[j][k] == 1 and visited[j][k] == False:
