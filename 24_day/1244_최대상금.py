@@ -130,28 +130,19 @@ sys.stdin = open('1244_input.txt', 'r')
 
 for i in range(1, int(input())+1):
     nums, c = map(int, input().split())
-    int_nums = list(map(int, str(nums)))
-    nums = str(nums)
-    num_set = set()
-    num_set.add(nums)
-    int_nums = list(map(int, str(nums)))
+    num_set = {str(nums)}
     n = 0
-    max_val = 0
-    temp2 = set()
     while n < c:
+        temp2 = set()
         while num_set:
-            temp = num_set.pop()
-            temp = list(temp)
-            print(temp)
-            for i in range(len(temp)-1):
-                for j in range(i, len(temp)):
-                    temp[i], temp[j] = temp[j], temp[i]
-                    temp2.add(''.join(temp))
-                    temp[j], temp[i] = temp[i], temp[j]
-                num_set = temp2
-                print(num_set)
-                temp2 = set()
+            temp = list(num_set.pop())
+            for j in range(len(temp)-1):
+                for k in range(j, len(temp)):
+                    if j == k: continue
+                    if temp[j] <= temp[k]:
+                        temp[j], temp[k] = temp[k], temp[j]
+                        temp2.add((''.join(temp)))
+                        temp[k], temp[j] = temp[j], temp[k]
+        num_set = temp2
         n += 1
-
-    print(max(num_set))
-    print()
+    print('#{} {}'.format(i, max(num_set)))

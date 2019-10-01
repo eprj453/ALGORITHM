@@ -4,17 +4,15 @@ sys.stdin = open('7465_input.txt', 'r')
 
 def bfs(q):
     global count
-
     if not q:
         count += 1
         return
-
     else:
         for ele in matrix[q[0]]:
             if visited[ele] == False:
                 visited[ele] = True
                 q.append(ele)
-        q.popleft()
+        q.pop(0)
         bfs(q)
 
 
