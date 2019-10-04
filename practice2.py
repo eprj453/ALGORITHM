@@ -1,3 +1,5 @@
+import time
+
 # print((5+1)%6 + (4+1)%6)
 
 
@@ -35,4 +37,35 @@
 
 # print(9//5)
 # print(9%5)
-print(5 % 6)
+#
+# list1 = [0,1,2,3,4,5]
+# ans = {0,1,2,3,4,5}
+# n, c = 0, 5
+#
+# for j in list(ans):
+#     for lis in list1:
+#         if int((str(lis) + str(j))) == 1111 or int((str(j) + str(lis))) == 1111:
+#             print('c')
+#         ans.add(int((str(lis) + str(j))))
+#         ans.add(int((str(j) + str(lis))))
+#     # ans.add(list)
+#     # c += 1
+# print(len(ans))
+# print(ans)
+
+start = time.time()
+set_num = 793881
+n = 1
+c = set_num // 2
+t_list = []
+while n <= c:
+    if set_num % n == 0:
+        t_list.append(n)
+    n += 1
+
+print(t_list)
+print('time : {}'.format(time.time() - start))
+
+list1 = [5,4,3,2,1]
+list1 = list1[2:]
+print(list1)
