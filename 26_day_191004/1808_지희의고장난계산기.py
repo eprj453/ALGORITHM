@@ -13,10 +13,10 @@ for i in range(1, int(input())+1):
         if set_num % c == 0:
             aliquots.append(c)
         c -= 1
-
+    k = 0
     while set_num > 0:
         result1 = False
-        for j in range(0, len(aliquots)):
+        for j in range(k, len(aliquots)):
             result2 = True
             aliquot = aliquots[j]
             for ali in str(aliquot):
@@ -27,7 +27,8 @@ for i in range(1, int(input())+1):
             if result2 == True and set_num % aliquot == 0: # 가지고 있는 숫자로 만들 수 있는 약수 발견
                 set_num /= aliquot
                 ope_count += (len(str(aliquot))+1)
-                aliquots = aliquots[j:]
+                # aliquots = aliquots[j:]
+                k = j
                 result1 = True
                 break
 
