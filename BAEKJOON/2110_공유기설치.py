@@ -1,6 +1,4 @@
-nc = list(map(int, input().split()))
-n = nc[0]
-c = nc[1]
+n, c = map(int, input().split()) # 집의 갯수, 공유기 갯수
 house_list = []
 for i in range(n):
     house_list.append(int(input()))

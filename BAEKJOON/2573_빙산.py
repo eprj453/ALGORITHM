@@ -1,10 +1,6 @@
 def melt(melt_count):
     # print('함수호출')
     global min_melt
-    #
-    # if melt_count > min_melt:
-    #     # min_melt = 0
-    #     return
 
     visited = []
     melt_ice = []
@@ -44,17 +40,10 @@ def melt(melt_count):
             icebergs[i][j] -= melt_ice[i][j]
             if icebergs[i][j] <= 0:
                 icebergs[i][j] = 0
-    #     print(icebergs[i])
-    #
-    # print(melt_count)
-    # print()
+
     if result == False:
         min_melt = 0
         return
-
-    # if temp_melt >= 2:
-    #     min_melt = min(min_melt, melt_count)
-    #     return
 
     else:
         melt(melt_count+1)

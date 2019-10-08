@@ -9,11 +9,8 @@ def spread_virus(temp):
         v_temp = [False] * m
         v_visited.append(v_temp)
 
-    # for i in range(3):
-    #     maps[temp[i][0]][temp[i][1]] = 1
 
     v_count = 0
-    result = True
     for vi in range(len(virus)):
         v_x, v_y = virus[vi][0], virus[vi][1]
         v_visited[v_x][v_y] = True
@@ -71,23 +68,8 @@ min_spread = 64
 temp = []
 r = 3
 comb(0, 0)
-# print(safes)
-# print('virus_spread : ', virus_spread)
-# print('min_spread : ', min_spread)
-# print('safe : ', safe)
-# # print(min_spread+virus_spread)
-# print('wall : ', wall+3)
-# print('min_ans : ',min_ans)
 print(len(safe_zone) - min_spread - 3)
-# print(safes - (min_spread))
-# print(len(walls))
-# for i in range(1 << len(walls)):
-#     wall_temp = []
-#     for j in range(i+1):
-#         if i & (1 << j):
-#             wall_temp.append(walls[j])
-#     if len(wall_temp) == 3:
-#         print(wall_temp)
+
 print('time : {}'.format(time.time()-start))
 
 
