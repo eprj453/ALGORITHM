@@ -41,7 +41,6 @@ def spread_virus(temp):
 
 
 def comb(k, start):
-    global min_ans
     if k == r:
         spread_virus(temp)
         return
