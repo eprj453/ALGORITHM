@@ -69,31 +69,34 @@ import time
 # list1 = [5,4,3,2,1]
 # list1 = list1[2:]
 # print(list1)
+#
+# def comb(s, start):
+#     global cnt
+#     cnt += 1
+#     if s == r:
+#         print(temp)
+#         return
+#
+#     else:
+#         for i in range(start, n):
+#             temp.append(list1[i])
+#             comb(s+1, i+1)
+#             temp.pop()
+#             # if visited[i]: continue
+#             # else:
+#             #     visited[i] = True
+#             #     temp[s] = list1[i]
+#             #     comb(s+1)
+#             #     visited[i] = False
+#
+# list1 = list(range(64))
+# n = len(list1)
+# temp = []
+# r = 3
+# visited = [False] * n
+# cnt = 0
+# comb(0, 0)
+# print(cnt)
 
-def comb(s, start):
-    global cnt
-    cnt += 1
-    if s == r:
-        print(temp)
-        return
-
-    else:
-        for i in range(start, n):
-            temp.append(list1[i])
-            comb(s+1, i+1)
-            temp.pop()
-            # if visited[i]: continue
-            # else:
-            #     visited[i] = True
-            #     temp[s] = list1[i]
-            #     comb(s+1)
-            #     visited[i] = False
-
-list1 = list(range(64))
-n = len(list1)
-temp = []
-r = 3
-visited = [False] * n
-cnt = 0
-comb(0, 0)
-print(cnt)
+a = '(3+4)*2'
+print(int(a))

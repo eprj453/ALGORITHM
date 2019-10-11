@@ -17,7 +17,6 @@ def in_order(v):
             in_order(children[v][1])
 
 def post_order(v):
-
     if v != 0:
         post_order(children[v][0])
         post_order(children[v][1])

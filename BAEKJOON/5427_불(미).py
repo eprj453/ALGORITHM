@@ -90,6 +90,11 @@ def fire_spread(my_q, fire_q):
                         maps[x+dx[k]][y+dy[k]] = '@'
                         my_new_q.append([x+dx[k], y+dy[k], z+1])
 
+    for i in range(h):
+        print(maps[i])
+    print()
+
+
     fire_spread(my_new_q, fire_new_q)
 
 
