@@ -70,6 +70,7 @@ def fire_spread(my_q, fire_q):
     if fire_q:
         for i in range(len(fire_q)):
             x, y = fire_q[i][0], fire_q[i][1]
+            print(x, y)
             for k in range(len(dx)):
                 if 0 <= x+dx[k] < h and 0 <= y+dy[k] < w:
                     if maps[x+dx[k]][y+dy[k]] != '#' and maps[x+dx[k]][y+dy[k]] != '*' and fire_visited[x+dx[k]][y+dy[k]] == False:
@@ -79,20 +80,25 @@ def fire_spread(my_q, fire_q):
     # print('fire_new_q : ', fire_new_q)
     if my_q:
         for i in range(len(my_q)):
+
             x, y, z  = my_q[i][0], my_q[i][1], my_q[i][2]
-            if x == 0 or y == 0 or x == h-1 or y == w-1:
-                distance = min(distance, z+1)
-                return
+            # print(x, y, z)
+            # if x == 0 or y == 0 or x == h-1 or y == w-1:
+            #     distance = min(distance, z+1)
+            #     return
             for k in range(len(dx)):
                 if 0 <= x+dx[k] < h and 0 <= y+dy[k] < w:
                     if maps[x+dx[k]][y+dy[k]] == '.' and fire_visited[x+dx[k]][y+dy[k]] == False and my_visited[x+dx[k]][y+dy[k]] == False:
+                        if (x+dx[k] == 0 or y+dy[k] == 0 or x+dx[k] == h-1 or y+dy[k] == w-1) and maps[x+dx[k]][y+dy[k]] == '.':
+                            distance = min(distance, z+2)
+                            return
                         my_visited[x+dx[k]][y+dy[k]] = True
                         maps[x+dx[k]][y+dy[k]] = '@'
                         my_new_q.append([x+dx[k], y+dy[k], z+1])
 
-    for i in range(h):
-        print(maps[i])
-    print()
+    # for i in range(h):
+    #     print(maps[i])
+    # print()
 
 
     fire_spread(my_new_q, fire_new_q)
