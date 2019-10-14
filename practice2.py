@@ -97,6 +97,17 @@ import time
 # cnt = 0
 # comb(0, 0)
 # print(cnt)
+#
+# a = '(3+4)*2'
+# print(int(a))
 
-a = '(3+4)*2'
-print(int(a))
+
+# t = (1,2,3)
+# print(t[2])
+
+a = 2
+
+print(list1)
+#
+# for i in list1:
+#     print(a+i)
