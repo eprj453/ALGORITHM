@@ -37,3 +37,5 @@ for i in range(1, int(input())+1):
     print('#{} {}'.format(i, prim_minTree(graph, 0)))
     # print(ans)
     # print()
+
+
