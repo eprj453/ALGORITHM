@@ -105,9 +105,6 @@ import time
 # t = (1,2,3)
 # print(t[2])
 
-a = 2
-
-print(list1)
 #
 # for i in list1:
 #     print(a+i)

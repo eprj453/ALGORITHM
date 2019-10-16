@@ -4,10 +4,14 @@ sys.stdin = open('5250_input.txt', 'r')
 def min_fare(x, y, z, d):
     global min_distance
 
-    if z >= min_distance:
-        return
+    # if z >= min_distance:
+    #     print('return, ', z)
+    #     return
 
     if d == (n-1) * 2:
+        print('x, y :', x, y)
+        print('z : ', z)
+        print()
         min_distance = min(min_distance, z)
         return
 
