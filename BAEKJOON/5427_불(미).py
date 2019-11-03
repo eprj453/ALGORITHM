@@ -62,8 +62,6 @@ def fire_spread(my_q, fire_q):
     # print('my_q : ', my_q)
     if len(my_q) == 0:
         return
-    if len(fire_q) == 0:
-        return
 
     my_new_q = []
     fire_new_q = []

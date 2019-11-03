@@ -9,7 +9,6 @@ def spread_virus(temp):
         v_temp = [False] * m
         v_visited.append(v_temp)
 
-
     v_count = 0
     for vi in range(len(virus)):
         v_x, v_y = virus[vi][0], virus[vi][1]
