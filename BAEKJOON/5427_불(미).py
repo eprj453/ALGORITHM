@@ -1,3 +1,6 @@
+import sys
+sys.stdin = open('5427_input.txt', 'r')
+
 # for i in range(1, int(input())+1):
 # #     w, h = map(int, input().split())
 # #     start_x, start_y = 0, 0
@@ -128,23 +131,79 @@
 #         print(distance)
 
 
-for _ in range(int(input())+1):
+dx, dy = [-1, 1, 0, 0], [0, 0, -1, 1]
+
+for _ in range(int(input())):
+    w, h = map(int, input().split())
     fires, me = [], []
     visited = []
-    w, h = map(int, input().split())
+    maps = []
+    min_d = 1000 * 1000
     for _ in range(h):
         temp = [False] * w
         visited.append(temp)
 
     for i in range(h):
-        temp = list(map(int, input().split()))
+        temp = list(input())
         for j in range(len(temp)):
             if temp[j] == '*':
                 fires.append([i, j])
                 visited[i][j] = True
-
             elif temp[j] == '@':
-                me.append([i, j])
+                me.append([i, j, 0])
+        maps.append(temp)
+
+
+    while me:
+
+        x, y, z = me[0][0], me[0][1], me[0][2]
+        # print(x, y)
+        # print(me)
+        # if x == 0 or y == 0 or x == h-1 or y == w-1:
+        #     min_d = min(min_d, z+1)
+
+        if fires:
+            new_fire = []
+            for fire in fires:
+                x, y = fire[0], fire[1]
+                for k in range(len(dx)):
+                    if 0 <= x + dx[k] < h and 0 <= y + dy[k] < w:
+                        # if maps[x+dx[k]][y+dy[k]] == '.':
+                        #     if x+dx[k] == 0 or y+dy[k] == 0 or x+dx[k] == h - 1 or y+dy[k] == w - 1:
+                        #         min_d = min(min_d, z + 1)
+                        if visited[x+dx[k]][y+dy[k]] == False and maps[x+dx[k]][y+dy[k]] != '#':
+                            maps[x+dx[k]][y+dy[k]] = '*'
+                            visited[x+dx[k]][y+dy[k]] = True
+                            new_fire.append([x+dx[k], y+dy[k]])
+            fires = new_fire
+            # print(new_fire)
+
+        for m in me:
+            x, y = m[0], m[1]
+            if x == 0 or y == 0 or x == h - 1 or y == w - 1:
+                min_d = min(min_d, z + 1)
+
+
+        new_me = []
+        # print(me)
+        for m in me:
+            # print(m)
+            x, y, z = m[0], m[1], m[2]
+            for k in range(len(dx)):
+                if 0 <= x + dx[k] < h and 0 <= y + dy[k] < w:
+                    if maps[x + dx[k]][y + dy[k]] == '.':
+                        maps[x+dx[k]][y+dy[k]] = '@'
+                        new_me.append([x+dx[k], y+dy[k], z+1])
+
+
+        me = new_me
+        #
+        # for i in range(h):
+        #     print(maps[i])
+        #
+        # print()
+    min_d = 'IMPOSSIBLE' if min_d == 1000*1000 else min_d
+    print(min_d)
 
 
 
@@ -154,6 +213,156 @@ for _ in range(int(input())+1):
 
 '''
 
+21
+1 1
+@
+3 3
+.#.
+#@#
+.#.
+3 3
+...
+.@.
+...
+3 3
+.#.
+#@#
+.#*
+8 3
+########
+#*@.....
+########
+5 6
+##.##
+#...#
+#.#.#
+#.#@#
+#*#.#
+#####
+5 6
+##.##
+#...#
+#.#.#
+#*#@#
+#.#.#
+#####
+5 6
+##.##
+#...#
+#*#.#
+#.#@#
+#.#.#
+#####
+8 9
+########
+#......#
+#.####.#
+#.#@.#.#
+#.##.#.#
+#....#.#
+######.#
+.......#
+########
+5 3
+##.##
+#*.@#
+#####
+7 7
+.......
+.*#.##.
+.##.##.
+...@...
+.##.##.
+.##.#*.
+.......
+7 7
+......*
+.##.##.
+.##.##.
+...@...
+.##.##.
+.##.##.
+*......
+7 7
+.*....*
+.##.##.
+.##.##.
+...@...
+.##.##.
+.##.##.
+.*....*
+7 7
+.......
+*##.##*
+.##.##.
+...@...
+.##.##.
+.##.##.
+*.....*
+7 7
+*....*.
+.##.##.
+.##.##.
+...@...
+.##.##.
+.##.##.
+*....*.
+7 7
+*.....*
+.##.##.
+.##.##.
+...@...
+.##.##.
+*##.##*
+.......
+7 7
+..#.#..
+.*#.#*.
+.##.##.
+...@...
+.##.##.
+.*#.#*.
+.......
+7 7
+.......
+.*#.#*.
+.##.###
+...@...
+.##.###
+.*#.#*.
+.......
+7 7
+.......
+.*#.#*.
+###.##.
+...@...
+###.##.
+.*#.#*.
+.......
+7 7
+.......
+.*#.#*.
+.##.##.
+...@...
+.##.##.
+.*#.#*.
+..#.#..
+5 3
+..#..
+.@#*.
+..#..
+'''
+
+'''
+1
+5 7
+...#*
+..##.
+##.#.
+#@...
+##.#.
+..##.
+...#*
 
 '''
 
