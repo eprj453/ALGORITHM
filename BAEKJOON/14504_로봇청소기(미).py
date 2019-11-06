@@ -42,30 +42,37 @@ r, c, d = map(int, input().split())
 visited, maps = [], []
 dx, dy = [-1, 0, 1, 0], [0, 1, 0, -1]
 x = 0
-print((x+3) % 4)
+# print((x+3) % 4)
 for _ in range(n):
     maps.append(list(map(int, input().split())))
     visited.append([False] * m)
 visited[r][c] = True
-clean_count = 0
+clean_count = 1
 while True:
-    left = (d+3) % 4
+    print(r, c, d)
+    print(clean_count)
+    can_spin = False
+    for i in range(4):
+        left = (d - i + 3) % 4
+        print(left, end=" ")
+        if visited[r+dx[left]][c+dy[left]] == False and maps[r+dx[left]][c+dy[left]] == 0:
+            r, c, d = r+dx[left], c+dy[left], left
+            visited[r+dx[left]][c+dy[left]] = True
+            can_spin = True
+            clean_count += 1
+            break
+    print()
 
-    if maps[r+dx[left]][c+dy[left]] == 0 and visited[r+dx[left]][c+dy[left]] == False: # 아직 방문 전
-        result = True
-        r, c, d = r+dx[left], c+dy[left], left
-        visited[r+dx[left]][c+dy[left]] = True
-        clean_count += 1
+    can_back = False
+    if can_spin == False: # 네 방향이 이미 청소되어 있거나 벽인 경우
+        print('cant spin')
+        back = (d+2) % 4
+        if maps[r+dx[back]][c+dy[back]] == 0:
+            can_back = True
+            r, c, d = r+dx[back], c+dy[back], d
 
+    if can_spin == False and can_back == False:
+        break
 
+print(clean_count)
 
-
-
-'''
-r, c >> 청소기 위치 [r,c]
-
-d = 0 > 북쪽 (-1, 0)
-d = 1 > 동쪽 (0, +1)
-d = 2 > 남쪽 (+1, 0)
-d = 3 > 서쪽 (0, -1)
-'''
