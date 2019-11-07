@@ -157,10 +157,6 @@ for _ in range(int(input())):
     while me:
 
         x, y, z = me[0][0], me[0][1], me[0][2]
-        # print(x, y)
-        # print(me)
-        # if x == 0 or y == 0 or x == h-1 or y == w-1:
-        #     min_d = min(min_d, z+1)
 
         if fires:
             new_fire = []
@@ -168,18 +164,13 @@ for _ in range(int(input())):
                 x, y = fire[0], fire[1]
                 for k in range(len(dx)):
                     if 0 <= x + dx[k] < h and 0 <= y + dy[k] < w:
-                        # if maps[x+dx[k]][y+dy[k]] == '.':
-                        #     if x+dx[k] == 0 or y+dy[k] == 0 or x+dx[k] == h - 1 or y+dy[k] == w - 1:
-                        #         min_d = min(min_d, z + 1)
                         if visited[x+dx[k]][y+dy[k]] == False and maps[x+dx[k]][y+dy[k]] != '#':
                             maps[x+dx[k]][y+dy[k]] = '*'
                             visited[x+dx[k]][y+dy[k]] = True
                             new_fire.append([x+dx[k], y+dy[k]])
             fires = new_fire
-            # print(new_fire)
 
         for m in me:
-            x, y = m[0], m[1]
             if x == 0 or y == 0 or x == h - 1 or y == w - 1:
                 min_d = min(min_d, z + 1)
 

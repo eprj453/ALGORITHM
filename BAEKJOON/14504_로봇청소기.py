@@ -43,32 +43,56 @@ visited, maps = [], []
 dx, dy = [-1, 0, 1, 0], [0, 1, 0, -1]
 x = 0
 # print((x+3) % 4)
+
 for _ in range(n):
     maps.append(list(map(int, input().split())))
-    visited.append([False] * m)
+    temp = [False] * m
+    visited.append(temp)
+
 visited[r][c] = True
 clean_count = 1
+
+# 0 북쪽(-1, 0)
+# 1 동쪽(0, 1)
+# 2 남쪽(1, 0)
+# 3 서쪽(0, -1)
+
+
 while True:
-    print(r, c, d)
-    print(clean_count)
+    # for i in range(n):
+    #     print(visited[i])
+    # print()
+    # print(r, c, d)
+    # print(clean_count)
     can_spin = False
     for i in range(4):
+        # 1 볼때
+        # 1 -0 +3 % 4 0
+        # 1 -1 +3 % 4 3
+        # 1 -2 +3 % 4 2
+        # 1 -3 +3 % 4 1
         left = (d - i + 3) % 4
-        print(left, end=" ")
-        if visited[r+dx[left]][c+dy[left]] == False and maps[r+dx[left]][c+dy[left]] == 0:
+        # print('my_dir : ', d)
+        # print('left : ',left)
+        # print('target : ', r+dx[left], c+dy[left])
+        # print('is_visited : ', visited[r+dx[left]][c+dy[left]])
+        # print('is_zero : ', maps[r+dx[left]][c+dy[left]])
+        # print()
+        if not visited[r+dx[left]][c+dy[left]] and maps[r+dx[left]][c+dy[left]] == 0:
+            # print('can go')
+            visited[r + dx[left]][c + dy[left]] = True
             r, c, d = r+dx[left], c+dy[left], left
-            visited[r+dx[left]][c+dy[left]] = True
             can_spin = True
             clean_count += 1
             break
-    print()
 
     can_back = False
     if can_spin == False: # 네 방향이 이미 청소되어 있거나 벽인 경우
-        print('cant spin')
+        # print('cant spin')
         back = (d+2) % 4
         if maps[r+dx[back]][c+dy[back]] == 0:
             can_back = True
+            visited[r+dx[back]][c+dy[back]] = True
             r, c, d = r+dx[back], c+dy[back], d
 
     if can_spin == False and can_back == False:
