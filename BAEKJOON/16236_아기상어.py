@@ -8,8 +8,10 @@ def bfs(x, y, d):
         return
 
     if d <= min_distance and maps[x][y] < shark and 0 < maps[x][y] < 7:
-        can_eat.append([d, x, y])
-        min_distance = d
+        if [d, x, y] not in can_eat:
+            can_eat.append([d, x, y])
+            print('append : ', d, x, y)
+            min_distance = min(min_distance, d)
         return
 
 
@@ -19,7 +21,6 @@ def bfs(x, y, d):
                 visited[x+dx[k]][y+dy[k]] = True
                 bfs(x+dx[k], y+dy[k], d+1)
                 visited[x+dx[k]][y+dy[k]] = False
-
 
 
 
@@ -47,15 +48,28 @@ for i in range(n):
 q = [shark_d]
 visited[shark_d[0]][shark_d[1]] = True
 
-print(shark_d)
+# print(shark_d)
 
-can_eat = []
-min_distance = 20*20
+while True:
+    can_eat = []
+    min_distance = 20*20
 
 
-bfs(shark_d[0], shark_d[1], 0)
-print(can_eat)
-print(min_distance)
+    bfs(shark_d[0], shark_d[1], 0)
+
+    if not can_eat:
+        break
+    move += min_distance
+    can_eat.sort()
+    print(can_eat)
+    shark_d = [can_eat[0][1], can_eat[0][2]]
+    print('shark_d : ', shark_d)
+    visited[can_eat[0][1]][can_eat[0][2]] = True
+    shark += can_eat[0][0]
+
+print(move)
+    # print(can_eat)
+    # print(min_distance)
 
 
 # while True:
