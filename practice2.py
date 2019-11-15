@@ -59,10 +59,11 @@ m = 'ABC'
 # c.append([1,2])
 # print(c[0][1])
 
-
-
-
-
+my_dict = {
+    (1, 2) : [1, 2],
+    3: 4,
+}
+print(my_dict.get((1, 2)))
 
 # my_dict = {
 #     1: [[1,2],[3,4]]
