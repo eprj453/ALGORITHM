@@ -1,3 +1,4 @@
+
 import sys
 sys.stdin = open('4013_input.txt', 'r')
 

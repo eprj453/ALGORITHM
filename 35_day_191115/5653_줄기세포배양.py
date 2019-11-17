@@ -5,6 +5,7 @@ sys.stdin = open('5653_input.txt', 'r')
 
 
 # 0 : 비활성, 1 : 활성, 2 : 사멸
+# 대기 크기, 현상태, 원래크기
 dx, dy = [-1, 1, 0, 0], [0, 0, -1, 1]
 for i in range(1, int(input())+1):
     cnt = 0
@@ -29,32 +30,41 @@ for i in range(1, int(input())+1):
             # print(key)
             if info[1] == 0: # 비활성
                 temp_info = temp_dict.get(key)
-                temp_info[0] -= 1
-                if info[0] == 0:
+                if temp_info[0] == 1:
+                    temp_info[0] = 0
                     temp_info[1] = 1
+                else:
+                    temp_info[0] -= 1
                     # print('change!')
-            elif info[1] == 1: # 활성상태
-                temp_info = temp_dict.get(key)
+            if info[1] == 1: # 활성상태
+                temp_info = temp_dict.get(key) # 현재 내 정보
                 for l in range(len(dx)):
                     target = (key[0] + dx[l], key[1] + dy[l])
                     # print('info : ', cell_dict.get((key[0] + dx[l], key[1] + dy[l])))
-                    if cell_dict.get(target) == None: # 아무도 없는 땅일 경우
+                    if temp_dict.get(target) == None: # 아무도 없는 땅일 경우
                         # print('is_round')
                         temp_dict[target] = [info[2], 0, info[2]]
                         cnt += 1
                     else: # 누군가 상주하고 있을 경우
-                        temp_info = temp_dict.get(target) # 상주하고 있는 곳의 정보
+                        target_info = temp_dict.get(target) # 상주하고 있는 곳의 정보
                         # print('is None : ',cell_dict.get((key[0] + dx[l], key[1] + dy[l])))
-                        if temp_info[1] == 0: # 상주하고 있는 세포가 비활성일 경우
-                            if temp_info[2] < info[2]: # 비활성이면서 타겟보다 내 크기가 더 큰 경우
-                                temp_dict[(key[0] + dx[l], key[1] + dy[l])] = [info[2], 0, info[2]] # temp의 정보 변경
+                        if target_info[1] == 0: # 상주하고 있는 세포가 비활성일 경우
+                            if target_info[2] < temp_info[2]: # 비활성이면서 타겟보다 내 크기가 더 큰 경우
+                                temp_dict[target] = [temp_info[2], 0, temp_info[2]] # temp의 정보 변경
                 temp_info[1] = 2 # 퍼진 후 사멸상태로 변경
-        # print(temp_dict)
+                cnt -= 1
+                # cnt -= 1
+        # print('temp_dict : ', temp_dict)
         # cell_dict = temp_dict
-        cell_dict = copy.deepcopy(temp_dict)
-        t += 1
+        cell_dict = temp_dict
+        # print('복사 cell_dict : ', cell_dict)
         # print()
+        t += 1
 
+    # for val in cell_dict.values():
+    #     if val[1] == 0 or val[1] == 1:
+    #         cnt += 1
+    # print(len(cell_dict))
     print(cnt)
 
 '''
