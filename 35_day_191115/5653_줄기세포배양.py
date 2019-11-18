@@ -9,8 +9,7 @@ sys.stdin = open('5653_input.txt', 'r')
 dx, dy = [-1, 1, 0, 0], [0, 0, -1, 1]
 for i in range(1, int(input())+1):
     cnt = 0
-    cell_dict = {
-
+    living_cells = {
     }
     n, m, k = map(int, input().split())
     # cells = [list(map(int, input().split())) for _ in range(n)]
@@ -18,54 +17,82 @@ for i in range(1, int(input())+1):
         temp = list(map(int, input().split()))
         for l in range(len(temp)):
             if temp[l] != 0:
-                cell_dict[(j, l)] = [temp[l], 0, temp[l]]
+                living_cells[(j, l)] = [temp[l], 0, temp[l]]
                 cnt += 1
     # print(cell_dict)
+    dead_cells = {}
     t = 0
     while t < k:
-        # print('cell_dict : ',cell_dict)
-        temp_dict = copy.deepcopy(cell_dict)
-        # print('temp_dict : ', temp_dict)
-        for key, info in cell_dict.items():
-            # print(key)
+        t_living_cells = copy.deepcopy(living_cells)
+        for key, info in living_cells.items():
             if info[1] == 0: # 비활성
-                temp_info = temp_dict.get(key)
+                temp_info = t_living_cells.get(key)
                 if temp_info[0] == 1:
                     temp_info[0] = 0
                     temp_info[1] = 1
                 else:
                     temp_info[0] -= 1
-                    # print('change!')
-            if info[1] == 1: # 활성상태
-                temp_info = temp_dict.get(key) # 현재 내 정보
+
+            elif info[1] == 1:
+                temp_info = t_living_cells.get(key)
                 for l in range(len(dx)):
                     target = (key[0] + dx[l], key[1] + dy[l])
-                    # print('info : ', cell_dict.get((key[0] + dx[l], key[1] + dy[l])))
-                    if temp_dict.get(target) == None: # 아무도 없는 땅일 경우
-                        # print('is_round')
-                        temp_dict[target] = [info[2], 0, info[2]]
-                        cnt += 1
-                    else: # 누군가 상주하고 있을 경우
-                        target_info = temp_dict.get(target) # 상주하고 있는 곳의 정보
-                        # print('is None : ',cell_dict.get((key[0] + dx[l], key[1] + dy[l])))
-                        if target_info[1] == 0: # 상주하고 있는 세포가 비활성일 경우
-                            if target_info[2] < temp_info[2]: # 비활성이면서 타겟보다 내 크기가 더 큰 경우
-                                temp_dict[target] = [temp_info[2], 0, temp_info[2]] # temp의 정보 변경
-                temp_info[1] = 2 # 퍼진 후 사멸상태로 변경
-                cnt -= 1
+                    if dead_cells.get(target) == None: # 죽은 셀이 자리를 차지하고 있을 경우
+                        if t_living_cells.get(target) == None:
+                            t_living_cells[target] = [temp_info[2], 0, temp_info[2]]
+                        else:
+                            target_info = t_living_cells.get(target)
+                            if target_info[1] == 0: #
+                                if target_info[2] < temp_info[2]:
+                                    target_info[0], target_info[2] = temp_info[0], temp_info[2]
+                                    # t_living_cells[target] = [temp_info[2], 0, temp_info[2]]
+                dead_cells[key] = [info[2], 2, info[2]]
+        living_cells = t_living_cells
+        t += 1
+
+    print(len(living_cells))
+
+        # print('temp_dict : ', temp_dict)
+        # for key, info in cell_dict.items():
+        #     # print(key)
+        #     if info[1] == 0: # 비활성
+        #         temp_info = temp_dict.get(key)
+        #         if temp_info[0] == 1:
+        #             temp_info[0] = 0
+        #             temp_info[1] = 1
+        #         else:
+        #             temp_info[0] -= 1
+        #             # print('change!')
+        #     if info[1] == 1: # 활성상태
+        #         temp_info = temp_dict.get(key) # 현재 내 정보
+        #         for l in range(len(dx)):
+        #             target = (key[0] + dx[l], key[1] + dy[l])
+        #             # print('info : ', cell_dict.get((key[0] + dx[l], key[1] + dy[l])))
+        #             if temp_dict.get(target) == None: # 아무도 없는 땅일 경우
+        #                 # print('is_round')
+        #                 temp_dict[target] = [info[2], 0, info[2]]
+        #                 cnt += 1
+        #             else: # 누군가 상주하고 있을 경우
+        #                 target_info = temp_dict.get(target) # 상주하고 있는 곳의 정보
+        #                 # print('is None : ',cell_dict.get((key[0] + dx[l], key[1] + dy[l])))
+        #                 if target_info[1] == 0: # 상주하고 있는 세포가 비활성일 경우
+        #                     if target_info[2] < temp_info[2]: # 비활성이면서 타겟보다 내 크기가 더 큰 경우
+        #                         temp_dict[target] = [temp_info[2], 0, temp_info[2]] # temp의 정보 변경
+        #         temp_info[1] = 2 # 퍼진 후 사멸상태로 변경
+        #         cnt -= 1
                 # cnt -= 1
         # print('temp_dict : ', temp_dict)
         # cell_dict = temp_dict
-        cell_dict = temp_dict
+        # cell_dict = temp_dict
         # print('복사 cell_dict : ', cell_dict)
         # print()
-        t += 1
+        # t += 1
 
     # for val in cell_dict.values():
     #     if val[1] == 0 or val[1] == 1:
     #         cnt += 1
     # print(len(cell_dict))
-    print(cnt)
+    # print(cnt)
 
 '''
 5 5 19
