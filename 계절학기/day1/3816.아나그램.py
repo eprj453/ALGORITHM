@@ -1,9 +1,3 @@
-# def anagram(s, e, word):
-#     if s == e:
-#         print(temp)
-#         return
-#     else:
-#         for k in range(s, )
 import sys
 sys.stdin = open('3816_input.txt', 'r')
 for i in range(1, int(input())+1):

@@ -4,6 +4,8 @@
 
 별도로 푸는 문제나 수업시간 외 과제들은 별도 폴더 번호 및 이름으로 업로드합니다.
 
+별도로 언어를 명시하지 않는 문제는 전부 Python으로 풀이한 문제입니다.
+
 
 
 ## 문제 풀이 현황
@@ -212,7 +214,48 @@ SWEXPERTACADEMY
 
 ##### 2019년 11월 15일
 
+SWEXPERTACADEMY
+
 2105 디저트카페 풀이 완료
 
 4013 특이한 자석 풀이 완료
 
+##### 2019년 12월 9일
+
+SWEXPERTACADEMY
+
+Course - Programming Professional - Ad Hoc Algorithms
+
+1일차 아나그램 풀이 완료
+
+##### 2019년 12월 11일
+
+SWEXPERTACADEMY
+
+Course - Programming Professional - Ad Hoc Algorithms
+
+1일차 최대 부분 배열 풀이 완료(Java)
+
+##### 2019년 12월 11일
+
+SWEXPERTACADEMY
+
+Course - Programming Professional - 동적 계획법
+
+Largest Empty Square 풀이 완료(Java, Python)
+
+타일링 풀이 완료
+
+##### 2019년 12월 13일
+
+SWEXPERTACADEMY
+
+Course - Programming Professional - 동적 계획법
+
+LCS 풀이 완료(C++)
+
+##### 2019년 12월 22일
+
+백준 14503 로봇 청소기 풀이 완료(Python, C++)
+
+백준 2636 치즈 풀이 완료

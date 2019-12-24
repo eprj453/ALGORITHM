@@ -1,0 +1,72 @@
+#include <stdio.h>
+
+void swap(int &x, int &y){
+	int temp = x; x = y; y = temp;
+}
+
+struct Heap{
+	int A[100003];
+	int N;
+
+	Heap(){
+		N = 0;
+	}
+	void clear(){
+		N = 0;
+	}
+	void push(int x){
+		A[++N] = x;
+		for(int i=N; i>1; i/=2)
+			if(A[i] > A[i/2]) 
+				swap(A[i], A[i/2]);
+	}
+	void pop(){
+		A[1] = A[N--];
+		for(int i=1;i*2<=N;){
+			int t = i*2;
+			if(i*2+1 <= N && A[i*2] < A[i*2+1]) t = i*2+1;
+
+			if(A[i] < A[t]){
+				swap(A[i], A[t]);
+				i = t;
+			}
+			else break;
+		}
+	}
+	int top(){
+		return A[1];
+	}
+	int size(){
+		return N;
+	}
+};
+
+int main(){
+	int T; 
+	scanf("%d",&T);
+	Heap heap;
+	for(int Test=1; Test<=T; Test++){
+		int N;
+		scanf("%d",&N);
+		heap.clear();
+
+		printf("#%d",Test);
+		for(int i=1; i<=N; i++){
+			int type;
+			scanf("%d",&type);
+			if(type == 1){
+				int x;
+				scanf("%d",&x);
+				heap.push(x);
+			}
+			if(type == 2){
+				if(heap.size() > 0) {
+					printf(" %d",heap.top()); 
+					heap.pop();
+				}
+				else printf(" -1");
+			}
+		}
+		printf("\n");
+	}
+}
