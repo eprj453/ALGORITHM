@@ -1,5 +1,5 @@
 #include<iostream>
-#include<vector>
+
 using namespace std;
 
 
@@ -11,27 +11,26 @@ int main(){
 	cin >> n >> m;
 	cin >> r >> c >> d;
 
-	vector < vector <int> > maps(n, vector <int> (m, 0));
-	vector < vector <int> > visited (n, vector <int> (m, 0));
-	
+    bool visited[50][50] = {false,}
+    int maps[50][50];
+    
+    int temp;
 	for (int i = 0; i < n; i++) {
 		for (int j = 0; j < m; j++) {
-			int temp;
 			cin >> temp;
 			maps[i][j] = temp;
-			visited[i][j] = 0;
 		}
 	}
 
-	visited[r][c] = 1;
+	visited[r][c] = true;
 	int clean_count = 1;
 
 	while (true) {
 		bool can_spin = false;
 		for (int i = 0; i < 4; i++) {
 			int left = (d - i + 3) % 4;
-			if (visited[r+dx[left]][c+dy[left]] == 0 && maps[r+dx[left]][c+dy[left]] == 0) {
-				visited[r+dx[left]][c+dy[left]] = 1;
+			if (visited[r+dx[left]][c+dy[left]] == false && maps[r+dx[left]][c+dy[left]] == 0) {
+				visited[r+dx[left]][c+dy[left]] = true;
 				r = r+dx[left];
 				c = c+dy[left];
 				d = left;
@@ -40,13 +39,13 @@ int main(){
 				break;
 			}
 		}
-		//cout << r << c << endl;
+
 		bool can_back = false;
 		if (can_spin == false) {
 			int back = (d+2)%4;
 			if (maps[r+dx[back]][c+dy[back]] == 0) {
 				can_back = true;
-				visited[r+dx[back]][c+dy[back]] = 1;
+				visited[r+dx[back]][c+dy[back]] = true;
 				r = r+dx[back];
 				c = c+dy[back];
 			}
