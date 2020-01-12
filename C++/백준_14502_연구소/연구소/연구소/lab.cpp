@@ -7,7 +7,6 @@ int ans = 0;
 vector <pair<int, int>> temp;
 int n, m;
 int r = 3;
-int size;
 int min_virus;
 int max_safe;
 vector <pair <int, int>> viruses;
@@ -90,7 +89,7 @@ void comb(int k, int start, vector <pair<int, int>> safe_zones, char maps[8][8])
 		spread_virus(maps);
 		return;
 	} else {
-		for (int i = start; i < size; i++) {
+		for (int i = start; i < safe_zones.size(); i++) {
 			temp.push_back(safe_zones[i]);
 			comb(k+1, i+1, safe_zones, maps);
 			temp.pop_back();
@@ -116,7 +115,6 @@ int main(){
 			maps[i][j] = temp;
 		}
 	}
-	size = safe_zones.size();
 	
 	comb(0, 0, safe_zones, maps);
 	//cout << "min_count : " << min_count << endl;

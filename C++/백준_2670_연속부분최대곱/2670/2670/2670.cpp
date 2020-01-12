@@ -1,19 +1,17 @@
 #include <iostream>
 using namespace std;
+double nums[10000];
+int n;
 
 double max_num (double x, double y) {
-	if (x >= y) {
-		return x;
-	} else {
-		return y;
-	}
+	return (x >= y) ? x : y;
 }
 
-double calculate(int t, double nums[10000]) {
+double calculate() {
 	double dp[10001];
 	dp[0] = nums[0];
 	double ans = nums[0];
-	for (int k = 1; k < t; k++) {
+	for (int k = 1; k < n; k++) {
 		dp[k] = max_num(1, dp[k-1]) * nums[k];
 		ans = max_num(ans, dp[k]);
 	}
@@ -22,9 +20,8 @@ double calculate(int t, double nums[10000]) {
 };
 
 int main(){
-	int n;
 	cin >> n;
-	double nums[10001], t;
+	double t;
 
 	for (int i = 0; i < n; i++) {
 		cin >> t;
@@ -33,6 +30,6 @@ int main(){
 
 	cout << fixed; 
 	cout.precision(3);
-	cout << calculate(n, nums) << endl;
+	cout << calculate() << endl;
 
 }
