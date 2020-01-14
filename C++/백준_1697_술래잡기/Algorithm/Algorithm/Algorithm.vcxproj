@@ -76,6 +76,9 @@
   <ItemGroup>
     <ClCompile Include="SW_9280_진용이네주차타워.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\..\..\Downloads\9280_input.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

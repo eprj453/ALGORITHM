@@ -1,19 +1,24 @@
 #include <iostream>
 #include <queue>
+  
 using namespace std;
+
+
 int min(int x, int y) {
 	if (x > y) {return y;}
 	else {return x;}
 }
 int main(){
+	//freopen("9280_input.txt", "r", stdin);
 	int tc, n, m;
 	cin >> tc;
 	for (int t = 1; t < tc+1; t++) {
+		int ans = 0;
 		int parking[101] = {0,};
 		int fare[100]; 
 		int temp; 
-		int weight[2002];
-		int parking_num[101];
+		int weight[2001];
+		int parking_num[2001];
 		cin >> n >> m;
 		for (int i = 0; i < n; i++) {
 			cin >> temp;
@@ -24,44 +29,67 @@ int main(){
 			cin >> temp;
 			weight[i] = temp;
 		}
-		int ans = 0;
 		bool can_park = true;
 		int parked_count = 0;
-		int next_park = 0;
+		int next = 0;
 		queue <int> waiting; 
-		for (int i = 0; i < 2*m; i++) {
+		
+		for (int i = 0; i < m*2; i++) {
 			cin >> temp;
-			if (temp < 0) { // 나가는 차량일 경우
-				cout << temp << " 나감" << endl;
-				temp = temp * -1;
-				next_park = min(parking_num[temp-1], next_park);
-				ans += (fare[parking_num[temp-1]] * parking[parking_num[temp-1]]);
-				cout << ans << endl;
-				can_park = true;
-
-			} else { // 들어오는 차량일 경우
-				cout << temp << " 들어옴" << endl;
-				if (can_park  == false) { // 여유공간이 없을 경우
-					waiting.push(temp-1);
-					//parking[can_park] = make_pair(can_park, temp);
-				} else {
-					if (waiting.size() > 0) {
-						parking[next_park] = waiting.front();
-						waiting.push(temp-1);
+			if (temp > 0) {
+				if (parked_count >= n) { // 빈자리가 없을 경우
+					waiting.push(temp);
+				} else { // 빈자리가 있을 경우
+					if (waiting.size() > 0) { // 대기가 있을 경우
+						int car = waiting.front();
+						parking[next] = weight[car-1];
+						cout << "들어가는 차 무게 : " << weight[car-1] << endl;
+						parking_num[car] = next;
+						cout << "들어가는 차 번호 : " << next << endl;
+						next++;
 						waiting.pop();
-					} else {
-						parking[next_park] = temp-1;
-						parking_num[temp-1] = next_park;
+						waiting.push(temp);
+					} else { // 대기도 없는 경우
+						parking[next] = weight[temp-1];
+						parking_num[temp] = next;
+						cout << "들어가는 차 무게 : " << weight[temp-1] << endl;
+						//parking_num[car] = next;
+						cout << "들어가는 차 번호 : " << next << endl;
+						next++;
 					}
-					while (next_park < n) {
-						if (parking[next_park] == 0) {break;}
-						else {next_park++;}
+
+					while (next < n) {
+						if (parking[next] == 0) break;
+						else {next++;}
 					}
 					parked_count++;
-					if (parked_count == n) {can_park = false;}
-					}
 				}
+			} else { // 차가 나가는 경우
+				temp = temp*-1;
+				cout << "주차 위치 : " << parking_num[temp] << endl;
+				ans += (fare[parking_num[temp]] * parking[parking_num[temp]]);
+				cout << "요금 추가" << (fare[parking_num[temp]] * parking[parking_num[temp]]) << endl;
+				next = min(next, parking_num[temp]);
+				parking[parking_num[temp]] = 0;
+				parked_count--;
+				if (waiting.size() > 0) {
+					int car = waiting.front();
+					parking[next] = weight[car-1];
+					cout << "들어가는 차 무게 : " << weight[car-1] << endl;
+					parking_num[car] = next;
+					cout << "들어가는 차 번호 : " << next << endl;
+					waiting.pop();
+				}
+
+				while (next < n) {
+					if (parking[next] == 0) {break;}
+					else {next++;}
+				}
+			
 			}
-			cout << ans << endl;
 		}
+		cout <<"#" << t<< " " << ans << endl;
 	}
+}
+
+
