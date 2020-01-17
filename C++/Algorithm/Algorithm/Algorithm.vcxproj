@@ -74,7 +74,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="SW_9280_진용이네주차타워.cpp" />
+    <ClCompile Include="BOJ_15683_감시.cpp" />
+    <ClCompile Include="SW_9280_진용이네주차타워.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\..\..\..\Downloads\9280_input.txt" />
