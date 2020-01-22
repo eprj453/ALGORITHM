@@ -2,132 +2,135 @@
 #include <queue>
 #include <vector>
 using namespace std;
-
+int n;
 int ans = 1000;
-bool connect[10][10] = {false,};
-int population[10];
+bool connect[11][11] = {false,};
+int population[11] = {};
+vector <int> set;
 
 int min(int x, int y) {
 	return x > y ? y : x;
 }
 
-void findConnect(int n, queue <int> Aside, queue <int> Bside, bool Acheck[10], bool Bcheck[10]) {
-	int Asize = Aside.size();
-	int Bsize = Bside.size();
-	
-	int Apopulation = 0;
-	int Bpopulation = 0;
-	bool visited[10] = {false,};
+bool findConnect(bool Acheck[11], bool Bcheck[11], queue <int> Asubset, queue <int> Bsubset) {
 
-	queue <int> Aq;
-	queue <int> Bq;
-	Aq.push(Aside.front());
-	Bq.push(Bside.front());
+	int Asize = Asubset.size() -1, Bsize = Bsubset.size()-1;
+	//int Atemp = 1, Btemp = 1;
+	bool Avisited[10] = {false,};
+	bool Bvisited[10] = {false,};
+	Avisited[Asubset.front()] = true;
+	Bvisited[Bsubset.front()] = true;
+	bool Aresult = true;
+	bool Bresult = true;
+	while (Asubset.size() > 0) {
+		int x = Asubset.front();
+		bool t = false;
+		for (int k = 0; k < n; k++) {
+			if (x != k && connect[x][k] == true  && Acheck[k] == true && Bcheck[k] == false && Avisited[k] == false) {
+				//Asubset.push(k);
+				Asize--;
+				Avisited[k] = true;
 
-	int Atemp = Aq.size(), Btemp = Bq.size();
-
-	visited[Aq.front()] = true;
-	while (Aq.size() > 0) {
-		int x = Aq.front();
-		//Atemp++;
-		//visited[x] = true;
-		for (int k = 0; k < n; k++ ) {
-			if (connect[x][k] == true && Acheck[k] == true && visited[k] == false) {
-				visited[k] = true;
-				Aq.push(k);
-				Atemp++;
-			}
+			};
 		}
-		Aq.pop();
+		Asubset.pop();
 	}
 
-	if (Asize == Atemp) {
-		visited[Bq.front()] = true;
-		while (Bq.size() > 0) {
-			int x = Bq.front();
-			//Btemp++;
+	if (Asize == 0) {
+		while (Bsubset.size() > 0) {
+			int x = Bsubset.front();
 			for (int k = 0; k < n; k++) {
-				if (connect[x][k] == true && Bcheck[k] == true && visited[k] == false) {
-					visited[k] = true;
-					Bq.push(k);
-					Btemp++;
-				}
+				if (x != k && connect[x][k] == true && Bcheck[k] == true && Acheck[k] == false && Bvisited[k] == false) {
+				//	Bsubset.push(k);
+					Bvisited[k]= true;
+					Bsize--;
+				} else Bresult = false;
 			}
-			Bq.pop();
+			Bsubset.pop();
 		}
 	}
 
-	if (Atemp == Asize && Btemp == Bsize) {
-		while (Aside.size() > 0) {
-			Apopulation += population[Aside.front()];
-			Aside.pop();
-		}
-		while (Bside.size() > 0) {
-			Bpopulation += population[Bside.front()];
-			Bside.pop();
-		}
-		ans = min(ans, abs(Bpopulation - Apopulation));
-	}
-
-	return;
+	if (Asize == 0 && Bsize == 0) {
+		cout << "true" << endl;
+		return true;
+	} else return false;
 }
 
-void findSubset(int n, int location[10]) {
+void findSubset() {
 	for (int i = 0; i < (1 << n); i++) {
-		//vector <int> Aside;
-		queue <int> Aside;
-		bool Acheck[10] = {false,};
+		queue <int> Aset;
+		bool Avisit[10] = {false,};
 		for (int j = 0; j < n; j++) {
 			if (i & (1 << j)) {
-				Aside.push(j);
-				Acheck[j] = true;
-
+				Aset.push(set[j]);
+				Avisit[j] = true;
 			}
 		}
-		
-		int Asize = Aside.size();
-		if (0 < Asize && Asize < n) {
-			queue <int> Bside;
-			bool Bcheck[10] = {false,};
+		if (0 < Aset.size() && Aset.size() < n) {
+			queue <int> Bset;
+			bool Bvisit[10] = {false,};
 			for (int k = 0; k < n; k++) {
-				if (Acheck[k] == false) {
-					Bside.push(k);
-					Bcheck[k] = true;
+				if (Avisit[k] == false) {
+					Bset.push(set[k]);
+					Bvisit[k] = true;
 				}
 			}
-			findConnect(n, Aside, Bside, Acheck, Bcheck);
+			
+			if (findConnect(Avisit, Bvisit, Aset, Bset)) {
+				int Ap = 0, Bp = 0;
+				while (Aset.size() > 0) {
+					Ap += population[Aset.front()];
+					cout << Aset.front() << " ";
+					Aset.pop();
+				} cout << endl;
+
+				while (Bset.size() > 0) {
+					Bp += population[Bset.front()];
+					cout << Bset.front() << " ";
+					Bset.pop();
+				} cout << endl;
+
+				ans = min(ans, abs(Ap-Bp));
+			}		
 		}
 	}
 }
 
-int main() {
-	int	n;
-	int location[10];
+int main(){
+	//int n;
 	int temp;
-
 	cin >> n;
-	for (int i = 0; i < n+1; i++) {
-		if (i == 0) {
-			for (int j = 0; j < n; j++) {
-				cin >> temp; 
-				population[j] = temp;
-				location[j] = j;
-			} 
-		} else {
-			cin >> temp;
-			int temp2;
-			for (int j = 0; j < temp; j++) {
-				cin >> temp2;
-				connect[temp2][i-1] = true;
-				connect[i-1][temp2] = true;
-			}
+	for (int i = 0; i < n; i++) {
+		cin >> temp;
+		population[i] = temp;
+		set.push_back(i);
+	}
+
+	for (int i = 0; i < n; i++) {
+		cin >> temp;
+		int temp2;
+		for (int j = 0; j < temp; j++) {
+			cin >> temp2;
+			connect[i][temp2-1] = true;
+			connect[temp2-1][i] = true;
 		}
 	}
 
-	findSubset(n, location);
-	if (ans == 1000) {
-		cout << -1 << endl;
-	} else {
-		cout << ans << endl;
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n; j++) {
+			cout << connect[i][j] << " ";
+		} cout << endl;
 	}
+	findSubset();
+	cout << ans << endl;
+	return 0;
 }
+
+6
+2 2 2 2 2 2
+1 3
+1 4
+1 1
+1 2
+1 6
+1 5
