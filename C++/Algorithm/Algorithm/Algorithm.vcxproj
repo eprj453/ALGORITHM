@@ -77,7 +77,15 @@
     <ClCompile Include="BOJ_15683_감시.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="BOJ_17141_게리맨더링.cpp" />
+    <ClCompile Include="PROGRAMMERS_LV3_네트워크.cpp" />
+    <ClCompile Include="SW_9282_초콜릿과건포도.cpp" />
+    <ClInclude Include="BOJ_17141_게리맨더링.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClCompile Include="BOJ_17142_다리만들기2.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="SW_1245_균형점.cpp" />
     <ClCompile Include="SW_9280_진용이네주차타워.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>

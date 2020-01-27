@@ -1,5 +1,7 @@
 #include <iostream>
 #include <vector>
+#include <queue>
+
 using namespace std;
 int dx[4] = {0, -1, 0, 1};
 int dy[4] = {1, 0, -1, 0};
@@ -10,6 +12,7 @@ int cctvCount = 0;
 
 
 void search(int cnt, int maps[8][8], int invisibleCount) {
+	
 	if (cnt == cctvCount) {
 		if (invisibleCount < ans) { 
 			ans = invisibleCount; 

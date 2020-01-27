@@ -21,7 +21,16 @@
     <ClCompile Include="BOJ_15683_감시.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="BOJ_17141_게리맨더링.cpp">
+    <ClCompile Include="BOJ_17142_다리만들기2.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="SW_1245_균형점.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="SW_9282_초콜릿과건포도.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="PROGRAMMERS_LV3_네트워크.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -29,5 +38,10 @@
     <None Include="..\..\..\..\..\..\Downloads\9280_input.txt">
       <Filter>리소스 파일</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BOJ_17141_게리맨더링.cpp">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
