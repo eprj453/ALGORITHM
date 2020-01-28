@@ -36,6 +36,9 @@
     <ClCompile Include="SW_1248_공통조상.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="SW_1247_최적경로.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\..\..\..\Downloads\9280_input.txt">
