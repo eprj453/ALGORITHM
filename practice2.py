@@ -63,7 +63,7 @@ my_dict = {
     (1, 2) : [1, 2],
     3: 4,
 }
-print(my_dict.get((1, 2)))
+# print(my_dict.get((1, 2)))
 
 # my_dict = {
 #     1: [[1,2],[3,4]]
@@ -82,3 +82,10 @@ print(my_dict.get((1, 2)))
 
 
 '''
+
+for i in range(5, 0, -1):
+    for j in range(1, i):
+        print("", end=" ")
+    for j in range(6, i, -1):
+        print("*", end="")
+    print()

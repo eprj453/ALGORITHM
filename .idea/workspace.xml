@@ -2,11 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d1f2ed6e-ef8b-474d-90ca-f2c0854de055" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/KAKAO/2020/문자열압축.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PYTHON/BAEKJOON/15998_카카오머니(미).py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PYTHON/SWEXPERTACADEMY/D3/1249_보급로.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/C++/Algorithm/Algorithm/Algorithm.vcxproj" beforeDir="false" afterPath="$PROJECT_DIR$/C++/Algorithm/Algorithm/Algorithm.vcxproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/C++/Algorithm/Algorithm/Algorithm.vcxproj.filters" beforeDir="false" afterPath="$PROJECT_DIR$/C++/Algorithm/Algorithm/Algorithm.vcxproj.filters" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/C++/Algorithm/Algorithm/BOJ_15683_감시.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/C++/Algorithm/Algorithm/BOJ_15683_감시.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PYTHON/19_day/5188_최소합.py" beforeDir="false" afterPath="$PROJECT_DIR$/PYTHON/19_day/5188_최소합.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/C++/Algorithm/Algorithm/SW_1247_최적경로.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/C++/Algorithm/Algorithm/SW_1247_최적경로.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/practice2.py" beforeDir="false" afterPath="$PROJECT_DIR$/practice2.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -43,8 +46,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.5188_최소합">
-    <configuration name="15953_상금헌터(카카오)" type="PythonConfigurationType" factoryName="Python" temporary="true">
+  <component name="RunManager" selected="Python.문자열압축">
+    <configuration name="문자열압축" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="algorithm" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -52,11 +55,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/BAEKJOON" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/KAKAO/2020" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/BAEKJOON/15953_상금헌터(카카오).py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/KAKAO/2020/문자열압축.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -65,7 +68,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="17822_원판돌리기" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="1249_보급로" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="algorithm" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -73,11 +76,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/BAEKJOON" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/PYTHON/SWEXPERTACADEMY/D3" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/BAEKJOON/17822_원판돌리기.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/PYTHON/SWEXPERTACADEMY/D3/1249_보급로.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -128,7 +131,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="동적_타일링" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="practice2" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="algorithm" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -136,11 +139,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/계절학기/Professional" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/계절학기/Professional/동적_타일링.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/practice2.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -151,11 +154,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.문자열압축" />
+        <item itemvalue="Python.practice2" />
+        <item itemvalue="Python.1249_보급로" />
         <item itemvalue="Python.5188_최소합" />
         <item itemvalue="Python.2636_치즈" />
-        <item itemvalue="Python.15953_상금헌터(카카오)" />
-        <item itemvalue="Python.동적_타일링" />
-        <item itemvalue="Python.17822_원판돌리기" />
       </list>
     </recent_temporary>
   </component>

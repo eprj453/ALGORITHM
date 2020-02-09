@@ -3,7 +3,11 @@ using namespace std;
 
 int min_distance;
 
-void findDistance(int n, bool visited[10], int distance) {
+int temp[10];
+
+bool visited[12] = {false,}
+
+void findDistance(int n, bool visited[10], int distance, int customer) {
 	for (int k = 1; k < n-1; k++) {
 		if (visited[k] == false) {
 			visited[k] = true;
@@ -33,6 +37,9 @@ int main() {
 				customers[i-2][1] = y;
 			}
 		}
+
+		visited[0] = true;
+		visited[n+1] = true;
 		min_distance = 1000;
 
 	}
