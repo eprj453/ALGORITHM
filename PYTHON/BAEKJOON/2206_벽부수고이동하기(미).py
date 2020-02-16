@@ -1,87 +1,65 @@
-# def bfs(x, y, chance, move):
+import sys
+from collections import deque
+sys.setrecursionlimit(10000000)
+
+min_distance = 1000*1000
+# def bfs(x, y, can_break, distance):
+#     global min_distance
 #
-#     global min_move
+#     if distance >= min_distance:
+#         return
 #
-#     if move >= min_move:
-#         return
-#     if x > n-1 or y > m-1:
-#         return
 #     if x == n-1 and y == m-1:
-#         min_move = min(move+1, min_move)
+#         min_distance = min(min_distance, distance)
 #         return
 #
+#     for k in range(4):
+#         xk, yk = x + dx[k], y + dy[k]
+#         if 0 <= xk < n and 0 <= yk < m:
+#             # print(xk, yk)
+#             if maps[xk][yk] == 1:
+#                 if can_break == 1 and visited[xk][yk] == False:
+#                     can_break = 0
+#                     visited[xk][yk] = True
+#                     bfs(xk, yk, can_break, distance+1)
+#                     # visited[xk][yk] = False
+#                     # can_break = 1
+#             else:
+#                 if visited[xk][yk] == False:
+#                     visited[xk][yk] = True
+#                     bfs(xk, yk, can_break, distance+1)
+#                     # visited[xk][yk] = False
 #
-#     for i in range(len(dx)):
-#         if 0 <= x + dx[i] < n and 0 <= y + dy[i] < m:
-#             if chance == 1 and maps[x+dx[i]][y+dy[i]] == 1 and visited[x+dx[i]][y+dy[i]] == False:
-#                 visited[x+dx[i]][y+dy[i]] = True
-#                 bfs(x+dx[i], y+dy[i], 0, move+1)
-#                 # visited[x+dx[i]][y+dy[i]] = False
-#             if maps[x+dx[i]][y+dy[i]] == 0 and visited[x+dx[i]][y+dy[i]] == False:
-#                 visited[x+dx[i]][y+dy[i]] = True
-#                 bfs(x+dx[i], y+dy[i], chance, move+1)
-#                 visited[x+dx[i]][y+dy[i]] = False
-def bfs(q):
-    global min_move
+#
 
-    if not q:
-        return
 
-    x, y, c, d = q[0][0], q[0][1], q[0][2], q[0][3]
 
-    if d >= min_move:
-        return
-    if x == n-1 and y == m-1:
-        min_move = min(d+1, min_move)
-        return
-
-    for i in range(len(dx)):
-        if 0 <= x + dx[i] < n-1 and 0 <= y + dy[i] < m-1:
-            if c == 1 and maps[x+dx[i]][y+dy[i]] == 1 and visited[x+dx[i]][y+dy[i]] == False:
-                visited[x+dx[i]][y+dy[i]] = True
-                q.append([x+dx[i], y+dy[i], 0, d+1])
-            elif maps[x+dx[i]][y+dy[i]] == 0 and visited[x+dx[i]][y+dy[i]] == False:
-                visited[x+dx[i]][y+dy[i]] = True
-                q.append([x+dx[i], y+dy[i], c, d+1])
-
-    q.pop(0)
-    bfs(q)
-
-dx, dy = [-1, 1, 0, 0], [0, 0, -1, 1]
 n, m = map(int, input().split())
 maps = [list(map(int, input())) for _ in range(n)]
-visited = []
-for i in range(n):
-    temp = [False] * m
-    visited.append(temp)
-# print(visited)
-q = [[0,0,1,0]]
-min_move = 1000*1000
-bfs(q)
-# if min_move == 1000*1000:
-#     print(-1)
-# else:
-#     print(min_move)
-min_move = -1 if min_move == 1000*1000 else min_move
-print(min_move)
-    # 2
-    # 4
-    #
-    # 0111
-    # 0010
+visited = [[False] * m for _ in range(n)]
+dx, dy = [0, 1, 0, -1], [-1, 0, 1, 0]
+min_distance = 1000*1000
+q = deque()
+# x, y, 부순적이 있는가, 부술수 있는가, distance
+q.append([0, 0, 0, 1, 1])
+visited[0][0] = True
+go = True
+while q and go:
+    x, y, isBreaked, b, d = q[0][0], q[0][1], q[0][2], q[0][3], q[0][4]
+    for k in range(4):
+        xk, yk = x + dx[k] , y + dy[k]
+        if 0 <= xk < n and 0 <= yk < m:
+            if xk == n - 1 and yk == m - 1:
+                min_distance = min(min_distance, d + 1)
+                go = False
+                break
+            elif maps[xk][yk] == 1 and visited[xk][yk] == False:
+                if isBreaked == 0 and b == True:
+                    visited[xk][yk] = True
+                    q.append([xk, yk, 1, False, d+1])
+            elif maps[xk][yk] == 0 and visited[xk][yk] == False:
+                visited[xk][yk] = True
+                q.append([xk, yk, isBreaked, b, d+1])
+    q.popleft()
 
-'''
-4 4
-0101
-0101
-0001
-1110
-
-6 8
-00000000
-11111000
-11111000
-11111000
-11111000
-11111000
-'''
+print(min_distance if min_distance != 1000*1000 else -1)
