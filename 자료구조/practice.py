@@ -1,3 +1,4 @@
+import copy
 def comb(arr, temp, visited, end, k):
     global num
     global ans
@@ -5,7 +6,7 @@ def comb(arr, temp, visited, end, k):
     if not ans:
         if len(temp) == end:
             if num == k:
-                ans = temp
+                ans = temp.copy()
                 print(ans)
             else:
                 num += 1
