@@ -48,6 +48,9 @@
     <ClCompile Include="BOJ_1799_비숍.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="SW_4008_숫자만들기.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\..\..\..\Downloads\9280_input.txt">
