@@ -132,18 +132,88 @@ sys.stdin = open('5656_input.txt', 'r')
     # print(b)
 
 
+from collections import deque
+import copy
 
-def drop(s):
-    if s == n:
-        print(temp)
+
+def drop(s, remain, maps):
+    global min_remain
+
+    if s == n or remain == 0:
+        min_remain = min(min_remain, remain)
         return
-    for k in range(len(breaks)):
-        temp.append(breaks[k])
-        drop(s+1)
-        temp.pop()
+
+    for i in range(w):
+        x, y = 0, i
+        is_block = False
+        while x < h:
+            if maps[x][y] != 0:
+                is_block = True
+                break
+            else:
+                x += 1
+
+        if is_block:
+            temp_map = copy.deepcopy(maps)
+            block_visited = []
+            for _ in range(h):
+                temp = [False] * w
+                block_visited.append(temp)
+            haveToBreak = [[x, y]]
+            q = deque()
+            q.append([x, y])
+            block_visited[x][y] = True
+
+            while q:
+                b = q.popleft()
+                x2, y2 = b[0], b[1]
+
+                if maps[x2][y2] == 1:
+                    if block_visited[x2][y2] == False:
+                        block_visited[x2][y2] = True
+                        haveToBreak.append([x2, y2])
+                else:
+                    for k in range(len(dx)):
+                        d_x, d_y = dx[k], dy[k]
+                        start, end = 0, maps[x2][y2] - 1
+                        while start < end:
+                            if 0 <= x2 + d_x < h and 0 <= y2 + d_y < w:
+                                if maps[x2 + d_x][y2 + d_y] >= 1 and block_visited[x2 + d_x][y2 + d_y] == False:
+                                    if maps[x2 + d_x][y2 + d_y] >= 2:
+                                        q.append([x2 + d_x, y2 + d_y])
+                                    block_visited[x2 + d_x][y2 + d_y] = True
+                                    haveToBreak.append([x2 + d_x, y2 + d_y])
+                            else:
+                                break
+                            d_x += dx[k]
+                            d_y += dy[k]
+                            start += 1
+
+            for b in haveToBreak:
+                if temp_map[b[0]][b[1]] != 0:
+                    temp_map[b[0]][b[1]] = 0
+            cnt = len(haveToBreak)
+
+            for j in range(w):
+                for k in range(h - 2, -1, -1):
+                    if temp_map[k][j] != 0 and temp_map[k + 1][j] == 0:
+                        x, y = k, j
+                        while x < h - 1:
+                            if x == h - 2 and temp_map[x + 1][y] == 0:
+                                temp_map[x + 1][y] = temp_map[k][j]
+                                temp_map[k][j] = 0
+                            if temp_map[x + 1][y] != 0:
+                                temp_map[x][y] = temp_map[k][j]
+                                temp_map[k][j] = 0
+                                break
+                            else:
+                                x += 1
+
+            drop(s + 1, remain - cnt, temp_map)
 
 
-for i in range(1, int(input())+1):
+dx, dy = [0, 1, 0, -1], [1, 0, -1, 0]
+for i in range(1, int(input()) + 1):
     n, w, h = map(int, input().split())
     b = 0
     blocks = []
@@ -152,28 +222,8 @@ for i in range(1, int(input())+1):
         b += (w - temp.count(0))
         blocks.append(temp)
     min_remain = b
-    breaks = []
-    for j in range(w):
-        count = 0
-        while count < h:
-            result = False
-            if blocks[count][j] != 0: # 칠 수 있는 벽돌이 존재
-                c = count
-                for k in range(c, c+n):
-                    if k + 1 == h:
-                        break
-                    if blocks[k][j] > 1:
-                        breaks.append(j)
-                        result = True
-                        break
-            if result:
-                break
-            count += 1
-    print(breaks)
-    temp = []
-    drop(0)
-    print()
-
+    drop(0, b, blocks)
+    print('#{} {}'.format(i, min_remain))
 
 
 

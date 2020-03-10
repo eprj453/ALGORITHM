@@ -7,180 +7,94 @@ sys.stdin = open('5653_input.txt', 'r')
 # 0 : 비활성, 1 : 활성, 2 : 사멸
 # 대기 크기, 현상태, 원래크기
 dx, dy = [-1, 1, 0, 0], [0, 0, -1, 1]
-for i in range(1, int(input())+1):
-    cnt = 0
-    living_cells = {
-    }
+# di = {1 : 123, 2: 234}
+# di.pop(2)
+# print(di)
+# print(di.keys())
+# print(di.get(2))
+for i in range(1, int(input()) + 1):
     n, m, k = map(int, input().split())
-    # cells = [list(map(int, input().split())) for _ in range(n)]
-    for j in range(n):
-        temp = list(map(int, input().split()))
-        for l in range(len(temp)):
-            if temp[l] != 0:
-                living_cells[(j, l)] = [temp[l], 0, temp[l]]
-                cnt += 1
-    # print(cell_dict)
+    cells = [list(map(int, input().split())) for _ in range(n)]
+    living_cells = {}
     dead_cells = {}
-    t = 0
-    while t < k:
-        t_living_cells = copy.deepcopy(living_cells)
-        for key, info in living_cells.items():
-            if info[1] == 0: # 비활성
-                temp_info = t_living_cells.get(key)
-                if temp_info[0] == 1:
-                    temp_info[0] = 0
-                    temp_info[1] = 1
+    living_count = 0
+    for j in range(n):
+        for l in range(m):
+            if cells[j][l] != 0:
+                living_cells[(j, l)] = [0, cells[j][l], cells[j][l]]
+                living_count += 1
+    for _ in range(k):
+        # print(living_cells)
+        new_cells = {}
+        for key, value in living_cells.items():
+            st, va, ce  = value[0], value[1], value[2]
+            if st == 0: # 아직 비활성일 경우
+                if va == 1:
+                    living_cells[key][0] = 1
                 else:
-                    temp_info[0] -= 1
+                    living_cells[key][1] -= 1
+                    # va -= 1
+            elif st == 1: # 활성 상태일 경우
+                for k in range(4):
+                    nx, ny = key[0]+dx[k], key[1]+dy[k]
+                    if new_cells.get((nx, ny)) == None:
+                        new_cells[(nx, ny)] = [0, ce, ce]
+                        living_count += 1
+                    else:
+                        targetSt = new_cells[(nx, ny)][0]
+                        if targetSt == 0 or targetSt == 1: # 비활성일 경우
+                            if targetSt < st:
+                                new_cells[(nx, ny)] = [0, ce, ce]
+                living_count -= 1
+                living_cells[key][0] = 2
+        living_cells.update(new_cells)
+    print(living_count)
 
-            elif info[1] == 1:
-                temp_info = t_living_cells.get(key)
-                for l in range(len(dx)):
-                    target = (key[0] + dx[l], key[1] + dy[l])
-                    if dead_cells.get(target) == None: # 죽은 셀이 자리를 차지하고 있을 경우
-                        if t_living_cells.get(target) == None:
-                            t_living_cells[target] = [temp_info[2], 0, temp_info[2]]
-                        else:
-                            target_info = t_living_cells.get(target)
-                            if target_info[1] == 0: #
-                                if target_info[2] < temp_info[2]:
-                                    target_info[0], target_info[2] = temp_info[0], temp_info[2]
-                                    # t_living_cells[target] = [temp_info[2], 0, temp_info[2]]
-                dead_cells[key] = [info[2], 2, info[2]]
-        living_cells = t_living_cells
-        t += 1
+            # for k in range(4):
+            #     nx, ny = key[0] + dx[k], key[1] + dy[k]
+            #     if living_cells[(nx, ny)] == None:
 
-    print(len(living_cells))
 
-        # print('temp_dict : ', temp_dict)
-        # for key, info in cell_dict.items():
-        #     # print(key)
-        #     if info[1] == 0: # 비활성
-        #         temp_info = temp_dict.get(key)
-        #         if temp_info[0] == 1:
-        #             temp_info[0] = 0
-        #             temp_info[1] = 1
-        #         else:
-        #             temp_info[0] -= 1
-        #             # print('change!')
-        #     if info[1] == 1: # 활성상태
-        #         temp_info = temp_dict.get(key) # 현재 내 정보
-        #         for l in range(len(dx)):
-        #             target = (key[0] + dx[l], key[1] + dy[l])
-        #             # print('info : ', cell_dict.get((key[0] + dx[l], key[1] + dy[l])))
-        #             if temp_dict.get(target) == None: # 아무도 없는 땅일 경우
-        #                 # print('is_round')
-        #                 temp_dict[target] = [info[2], 0, info[2]]
-        #                 cnt += 1
-        #             else: # 누군가 상주하고 있을 경우
-        #                 target_info = temp_dict.get(target) # 상주하고 있는 곳의 정보
-        #                 # print('is None : ',cell_dict.get((key[0] + dx[l], key[1] + dy[l])))
-        #                 if target_info[1] == 0: # 상주하고 있는 세포가 비활성일 경우
-        #                     if target_info[2] < temp_info[2]: # 비활성이면서 타겟보다 내 크기가 더 큰 경우
-        #                         temp_dict[target] = [temp_info[2], 0, temp_info[2]] # temp의 정보 변경
-        #         temp_info[1] = 2 # 퍼진 후 사멸상태로 변경
-        #         cnt -= 1
-                # cnt -= 1
-        # print('temp_dict : ', temp_dict)
-        # cell_dict = temp_dict
-        # cell_dict = temp_dict
-        # print('복사 cell_dict : ', cell_dict)
-        # print()
-        # t += 1
-
-    # for val in cell_dict.values():
-    #     if val[1] == 0 or val[1] == 1:
-    #         cnt += 1
-    # print(len(cell_dict))
-    # print(cnt)
-
-'''
-5 5 19
-3 2 0 3 0 
-0 3 0 0 0 
-0 0 0 0 0 
-0 0 1 0 0 
-0 0 0 0 2
-9 10 37
-0 0 0 0 0 0 0 0 3 0 
-0 0 0 0 0 0 0 0 5 3 
-0 0 2 0 0 0 0 4 0 0 
-3 0 0 0 0 0 4 0 0 0 
-0 0 0 0 0 3 5 0 0 2 
-0 0 0 0 0 0 0 0 0 5 
-0 0 0 0 0 0 0 0 2 3 
-0 0 0 0 0 0 0 0 0 0 
-0 0 2 2 0 0 0 0 0 0 
-20 18 83
-0 0 0 0 0 0 0 0 0 0 0 2 0 0 6 0 0 0 
-0 0 0 0 0 0 0 3 0 0 0 0 0 0 0 0 0 0 
-0 0 0 6 0 0 0 0 0 0 0 0 0 0 2 0 3 0 
-4 0 2 0 0 0 0 0 0 0 0 0 5 0 0 0 0 3 
-0 0 0 0 0 5 4 4 6 0 0 0 0 0 0 0 0 0 
-5 0 0 0 0 0 2 0 2 6 0 0 0 0 0 4 0 0 
-4 0 0 3 0 0 0 0 0 0 0 3 0 0 0 5 0 0 
-0 0 0 0 0 0 0 2 2 0 0 0 0 3 0 0 0 0 
-0 0 0 0 5 0 0 0 3 0 3 0 0 4 0 0 0 0 
-0 0 0 0 6 0 0 0 0 0 0 0 0 0 0 0 0 0 
-0 0 0 0 6 0 2 0 0 0 0 0 3 0 0 0 3 0 
-0 5 2 0 0 0 0 4 0 0 0 0 0 0 0 0 0 0 
-3 0 0 0 0 0 0 0 6 0 2 0 5 0 0 0 0 0 
-5 0 0 0 4 0 0 0 0 0 0 0 0 0 0 0 0 0 
-0 6 0 5 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
-0 0 0 4 0 0 0 0 0 0 0 0 0 0 2 0 0 0 
-0 0 3 4 5 0 0 0 0 0 0 0 0 0 0 6 0 0 
-2 0 0 0 0 3 0 0 0 0 0 0 0 0 0 5 0 0 
-0 0 0 0 0 0 0 0 0 3 6 2 0 0 0 0 0 0 
-49 43 283
-0 6 0 0 0 10 0 0 0 0 0 0 9 0 0 0 0 0 0 0 0 0 0 4 0 8 0 0 0 0 0 0 0 0 0 0 0 0 0 0 4 0 0 
-0 5 0 0 0 2 0 0 0 0 0 0 8 0 0 8 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
-0 0 3 7 0 0 0 0 0 0 9 0 1 0 5 0 0 1 0 0 0 0 0 0 0 0 0 0 0 9 0 7 0 0 0 0 0 0 0 0 1 0 0 
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 7 0 8 0 0 0 0 0 0 0 0 0 3 0 0 0 6 0 0 0 0 6 0 0 0 0 0 0 
-7 0 0 0 5 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 7 0 0 0 0 8 0 0 0 0 0 0 0 0 1 0 0 
-0 9 0 0 0 0 0 0 0 0 9 6 0 2 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 9 
-0 0 0 0 1 0 0 0 0 0 0 3 0 0 0 0 0 0 5 0 10 0 0 0 0 0 0 0 0 0 9 4 0 0 0 0 0 0 9 0 9 0 8 
-0 0 0 0 0 0 0 0 0 7 0 0 0 0 9 0 0 0 0 0 0 0 0 0 0 8 0 0 0 0 0 0 0 0 0 0 0 0 0 3 2 0 1 
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 3 3 0 0 4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2 0 0 0 0 0 
-0 0 0 0 0 0 0 0 0 7 0 0 0 2 0 0 0 0 0 0 8 0 0 0 0 10 0 0 1 7 0 8 0 0 0 0 0 0 0 0 0 0 0 
-0 0 0 0 0 0 0 2 0 0 9 0 0 0 0 0 8 0 0 0 0 0 4 0 6 0 0 0 0 0 0 6 0 0 0 0 0 0 0 0 0 0 0 
-1 0 0 0 0 0 0 6 0 2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 6 0 5 0 0 0 0 0 0 7 0 0 0 
-8 0 0 0 0 0 0 0 0 0 0 0 0 0 0 10 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 9 0 0 0 0 0 0 5 8 
-0 0 0 10 0 9 0 8 0 0 0 0 0 0 2 9 0 0 0 7 2 7 0 7 0 0 0 0 2 0 4 3 0 0 0 0 0 0 0 0 0 2 0 
-1 0 0 0 0 0 0 4 9 1 0 0 0 0 0 0 0 0 0 5 0 0 0 0 6 0 0 5 0 0 0 0 0 0 0 0 0 0 0 3 3 0 0 
-0 0 0 0 0 0 0 0 0 0 0 0 1 0 3 1 10 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 5 0 1 0 0 0 9 0 0 
-0 0 0 0 0 0 0 10 0 0 0 0 0 0 9 6 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 7 0 0 1 3 0 0 
-0 0 0 0 0 0 6 0 0 0 1 0 0 2 0 0 0 0 9 0 0 0 0 0 0 0 3 0 0 0 0 0 0 0 0 0 0 0 0 7 7 0 0 
-0 0 0 0 0 2 0 0 0 0 0 0 0 0 0 0 0 5 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 10 
-0 0 0 0 9 0 8 0 0 0 0 0 0 4 0 0 0 10 8 0 0 0 0 0 0 10 0 0 0 5 0 0 0 0 0 0 0 1 0 0 10 4 7 
-0 0 0 0 0 0 0 0 0 0 0 6 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 8 0 0 0 4 0 7 0 0 0 0 0 3 0 
-0 0 0 0 5 0 3 0 0 0 0 0 0 0 8 1 0 0 7 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
-0 0 9 0 1 0 0 0 0 10 7 0 0 0 0 0 2 0 0 7 0 0 0 0 0 0 0 7 0 0 4 0 0 0 0 0 0 0 0 0 0 0 0 
-0 0 0 0 0 0 0 8 2 0 4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 3 0 0 8 0 0 7 0 2 0 0 0 0 
-0 8 0 0 0 0 0 0 0 0 3 0 0 1 0 5 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 8 0 0 5 0 9 0 0 0 0 0 
-0 0 0 0 0 0 0 0 3 5 0 0 1 0 4 0 0 0 0 9 0 0 0 0 0 0 0 0 0 0 5 0 0 4 0 0 0 0 10 8 0 0 0 
-0 0 0 0 0 0 0 0 4 0 0 7 10 0 10 0 0 0 0 0 0 0 0 0 0 9 0 0 0 0 0 0 0 8 3 9 6 7 0 0 0 0 2 
-0 0 0 0 0 0 0 0 0 0 0 0 0 5 0 0 0 8 7 10 0 0 0 0 0 0 6 0 0 0 5 0 0 0 0 0 0 0 0 0 0 10 0 
-7 0 0 0 8 0 0 0 8 9 0 0 0 0 0 0 9 0 0 0 0 0 0 0 0 6 0 0 5 0 0 0 0 0 0 0 0 0 0 3 0 0 0 
-0 0 0 0 0 0 0 0 0 0 0 6 0 6 0 0 0 0 3 0 0 5 3 0 0 0 0 1 9 0 6 0 0 0 0 0 0 0 0 0 0 0 0 
-0 0 0 7 2 0 0 0 0 0 0 0 0 0 0 5 0 0 0 0 8 0 0 0 2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 7 6 
-0 9 0 0 0 0 0 0 0 0 0 3 0 9 2 0 0 0 4 0 2 9 2 0 6 0 0 0 0 0 0 0 0 0 0 0 0 0 8 0 0 0 0 
-0 0 0 3 0 1 0 0 8 0 0 0 0 0 0 0 0 0 0 0 0 3 0 0 0 0 0 7 0 6 0 0 0 0 0 7 0 0 0 0 4 7 10 
-1 0 0 0 5 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 5 0 8 0 0 0 0 0 0 0 0 3 9 2 
-5 0 0 0 0 0 0 0 0 0 1 0 0 1 0 0 0 0 6 0 0 0 0 0 0 0 0 9 0 8 0 0 0 0 0 0 0 3 0 0 0 0 0 
-0 0 0 0 7 0 10 0 0 0 6 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 3 0 0 0 0 0 0 0 0 0 0 0 8 2 3 0 0 
-0 0 0 0 0 5 0 0 6 0 0 3 0 0 0 0 0 8 0 0 6 0 0 0 8 0 0 5 0 0 0 0 8 0 0 0 0 0 0 0 5 0 1 
-7 0 9 0 7 0 0 9 0 0 0 0 4 0 0 0 0 0 0 8 1 0 4 0 0 0 0 0 0 0 0 0 4 7 0 0 8 0 0 0 0 0 0 
-0 0 0 1 0 0 0 0 0 0 0 0 6 0 0 0 0 0 0 0 4 0 0 0 0 0 0 0 0 0 2 3 1 0 0 4 0 3 10 0 0 0 5 
-0 0 4 0 0 0 0 0 0 4 4 0 0 0 8 0 4 0 2 0 8 0 0 0 0 0 0 0 9 0 0 0 0 5 0 0 0 0 0 0 0 0 0 
-0 0 8 0 7 0 0 0 0 0 0 0 0 0 0 4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2 6 0 0 0 0 1 0 0 0 0 4 3 
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 10 3 0 0 0 0 0 3 0 
-0 0 2 0 0 0 0 0 8 5 0 0 0 0 0 0 0 0 0 0 0 0 4 8 0 0 0 0 0 1 0 5 0 0 0 0 2 3 9 0 0 0 0 
-0 5 8 9 0 0 0 0 0 4 0 0 0 10 0 0 0 1 0 0 0 0 0 10 0 7 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
-6 0 0 0 0 0 10 0 5 0 0 0 0 0 0 0 0 0 0 0 6 0 0 0 0 0 0 0 0 10 0 0 0 0 0 0 0 0 0 0 0 0 0 
-0 0 0 0 0 0 9 0 0 0 0 0 0 2 0 0 0 4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 3 0 0 0 0 0 2 4 0 
-0 3 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 0 0 0 0 0 0 0 1 0 0 0 
-0 0 0 9 0 0 0 0 4 0 0 0 0 0 2 0 0 0 0 0 0 0 0 0 9 0 0 0 0 0 0 0 0 0 0 0 5 0 0 0 9 2 0 
-0 0 0 0 0 2 0 0 0 0 0 0 10 0 0 0 0 0 2 0 0 0 8 0 0 0 0 0 0 10 0 0 0 0 0 0 7 0 0 0 0 0 0 
-
-'''
+    # cnt = 0
+    # living_cells = {
+# }
+    # n, m, k = map(int, input().split())
+    # # cells = [list(map(int, input().split())) for _ in range(n)]
+    # for j in range(n):
+    #     temp = list(map(int, input().split()))
+    #     for l in range(len(temp)):
+    #         if temp[l] != 0:
+    #             living_cells[(j, l)] = [temp[l], 0, temp[l]]
+    #             cnt += 1
+    # # print(cell_dict)
+    # dead_cells = {}
+    # t = 0
+    # while t < k:
+    #     t_living_cells = copy.deepcopy(living_cells)
+    #     for key, info in living_cells.items():
+    #         if info[1] == 0: # 비활성
+    #             temp_info = t_living_cells.get(key)
+    #             if temp_info[0] == 1:
+    #                 temp_info[0] = 0
+    #                 temp_info[1] = 1
+    #             else:
+    #                 temp_info[0] -= 1
+    #
+    #         elif info[1] == 1:
+    #             temp_info = t_living_cells.get(key)
+    #             for l in range(len(dx)):
+    #                 target = (key[0] + dx[l], key[1] + dy[l])
+    #                 if dead_cells.get(target) == None: # 죽은 셀이 자리를 차지하고 있을 경우
+    #                     if t_living_cells.get(target) == None:
+    #                         t_living_cells[target] = [temp_info[2], 0, temp_info[2]]
+    #                     else:
+    #                         target_info = t_living_cells.get(target)
+    #                         if target_info[1] == 0: #
+    #                             if target_info[2] < temp_info[2]:
+    #                                 target_info[0], target_info[2] = temp_info[0], temp_info[2]
+    #                                 # t_living_cells[target] = [temp_info[2], 0, temp_info[2]]
+    #             dead_cells[key] = [info[2], 2, info[2]]
+    #     living_cells = t_living_cells
+    #     t += 1
+    #
+    # print(len(living_cells))
