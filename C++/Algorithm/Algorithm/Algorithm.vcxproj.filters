@@ -51,6 +51,9 @@
     <ClCompile Include="SW_4008_숫자만들기.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="BOJ_12865_평범한배낭.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\..\..\..\Downloads\9280_input.txt">
