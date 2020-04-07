@@ -18,7 +18,6 @@ def game(compare, ans):
 def solution(baseball):
     answer = set(str(x) for x in range(100, 1000) if '0' not in str(x)
                  and str[x][0] != str[x][1] and str[x][1] != str[x][2] and str[x][0] != str[x][2])
-    # print(len(answer))
     for base in baseball:
         num, strike, ball = base[0], base[1], base[2]
         notAnswer = set()

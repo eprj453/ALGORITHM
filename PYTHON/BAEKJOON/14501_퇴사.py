@@ -1,4 +1,3 @@
-
 def resign(day, money):
     global max_money
     if day >= n:

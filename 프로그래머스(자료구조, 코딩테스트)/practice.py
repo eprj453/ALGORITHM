@@ -1,4 +1,3 @@
-from functools import reduce
 # import heapq
 # # def solution(n, works):
 # #     answer = 0
@@ -89,7 +88,7 @@ from functools import reduce
 # # print(solution([[1,0,1,1,1],[1,0,1,0,1],[1,0,1,1,1],[1,1,1,0,1],[0,0,0,0,1]]))
 
 
-ans = 0
+
 # def goTravel(k, travel, start, totalMoney, totalTime):
 #     global ans
 #     if totalTime > k: return
@@ -133,12 +132,53 @@ ans = 0
 #
 # print(solution(3000, [[1000, 2000, 300, 700], [1100, 1900, 400, 900], [900, 1800, 400, 700], [1200, 2300, 500, 1200]]))
 
-arr1 = [1, 2, 3]
-arr = [(1, 2), (3, 4), (5, 6)]
-print(sum([x[1] for x in arr]))
-
-
-
-def solution(n, cores):
+ope_dict = {
+    '(' : 1,
+    '+' : 2,
+    '*' : 3,
+}
+for i in range(1, 11):
+    n = int(input())
+    formula = input()
+    postfix = []
+    stk= []
     answer = 0
-    return answer
+    for f in formula:
+        if f.isdigit(): # 숫자라면
+            postfix.append(f)
+        else:
+            if not stk: # 스택에 아무것도 없으면
+                stk.append(f)
+            elif f == '(':
+                stk.append(f)
+            elif f == ')':
+                while stk:
+                    ope = stk.pop()
+                    if ope == '(': break
+                    else:
+                        postfix.append(ope)
+            else:
+                while stk:
+                    if ope_dict[f] <= ope_dict[stk[-1]]:
+                        postfix.append(stk.pop())
+                    if not stk or ope_dict[f] > ope_dict[stk[-1]]:
+                        stk.append(f)
+                        break
+    while stk:
+        postfix.append(stk.pop())
+
+    for f in postfix:
+        if f.isdigit(): stk.append(int(f))
+        else:
+            result = 0
+            ope1 = int(stk.pop())
+            ope2 = int(stk.pop())
+            if f == '*':
+                result = ope1 * ope2
+            else:
+                result = ope1 + ope2
+            stk.append(result)
+        answer = stk[-1]
+    print('#{} {}'.format(i, answer))
+
+

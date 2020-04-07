@@ -1,38 +1,32 @@
 n, m = map(int, input().split())
 r, c, d = map(int, input().split())
-visited, maps = [], []
-dx, dy = [-1, 0, 1, 0], [0, 1, 0, -1]
-x = 0
+maps = [list(map(int, input().split())) for _ in range(n)]
 
-for _ in range(n):
-    maps.append(list(map(int, input().split())))
-    temp = [False] * m
-    visited.append(temp)
+dx, dy = [-1, 0, 1, 0], [0, 1, 0, -1]
+visited = [[False] * m for _ in range(n)]
 
 visited[r][c] = True
 clean_count = 1
 
 while True:
-    can_spin = False
     for i in range(4):
-        left = (d - i + 3) % 4
-        if not visited[r+dx[left]][c+dy[left]] and maps[r+dx[left]][c+dy[left]] == 0:
-            visited[r + dx[left]][c + dy[left]] = True
-            r, c, d = r+dx[left], c+dy[left], left
-            can_spin = True
+        # left = (d - i + 3) % 4
+        left = d - i
+        print(left)
+        rLeft, cLeft = r+dx[left], c+dy[left]
+        if not visited[rLeft][cLeft] and maps[rLeft][cLeft] == 0:
+            visited[rLeft][cLeft] = True
+            r, c, d = rLeft, cLeft, left
             clean_count += 1
             break
-
-    can_back = False
-    if can_spin == False:
+    else:
         back = (d+2) % 4
-        if maps[r+dx[back]][c+dy[back]] == 0:
-            can_back = True
-            visited[r+dx[back]][c+dy[back]] = True
-            r, c, d = r+dx[back], c+dy[back], d
-
-    if can_spin == False and can_back == False:
-        break
+        rBack, cBack = r + dx[back], c + dy[back]
+        if maps[rBack][cBack] == 0:
+            visited[rBack][cBack] = True
+            r, c, d = rBack, cBack, d
+        else:
+            break
 
 print(clean_count)
 
