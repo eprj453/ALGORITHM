@@ -1,12 +1,14 @@
 ans = 0xffffff
 def swap(s1, s2, arr, cnt, K):
     global ans
-    # print(arr)
+
     if cnt >= ans: return
     for a in range(len(arr)-1):
         if abs(arr[a+1] - arr[a]) > K:
             break
     else:
+        print(cnt)
+        print(arr)
         ans = min(ans, cnt)
         return
 
