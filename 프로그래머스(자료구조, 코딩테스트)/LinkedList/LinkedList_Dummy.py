@@ -89,3 +89,4 @@ class LinkedList:
             self.tail = L.tail
         self.nodeCount += L.nodeCount
         return True
+

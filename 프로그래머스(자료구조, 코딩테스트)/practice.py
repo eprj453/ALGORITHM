@@ -132,53 +132,54 @@
 #
 # print(solution(3000, [[1000, 2000, 300, 700], [1100, 1900, 400, 900], [900, 1800, 400, 700], [1200, 2300, 500, 1200]]))
 
-ope_dict = {
-    '(' : 1,
-    '+' : 2,
-    '*' : 3,
-}
-for i in range(1, 11):
-    n = int(input())
-    formula = input()
-    postfix = []
-    stk= []
-    answer = 0
-    for f in formula:
-        if f.isdigit(): # 숫자라면
-            postfix.append(f)
-        else:
-            if not stk: # 스택에 아무것도 없으면
-                stk.append(f)
-            elif f == '(':
-                stk.append(f)
-            elif f == ')':
-                while stk:
-                    ope = stk.pop()
-                    if ope == '(': break
-                    else:
-                        postfix.append(ope)
-            else:
-                while stk:
-                    if ope_dict[f] <= ope_dict[stk[-1]]:
-                        postfix.append(stk.pop())
-                    if not stk or ope_dict[f] > ope_dict[stk[-1]]:
-                        stk.append(f)
-                        break
-    while stk:
-        postfix.append(stk.pop())
+# ope_dict = {
+#     '(' : 1,
+#     '+' : 2,
+#     '*' : 3,
+# }
+# for i in range(1, 11):
+#     n = int(input())
+#     formula = input()
+#     postfix = []
+#     stk= []
+#     answer = 0
+#     for f in formula:
+#         if f.isdigit(): # 숫자라면
+#             postfix.append(f)
+#         else:
+#             if not stk: # 스택에 아무것도 없으면
+#                 stk.append(f)
+#             elif f == '(':
+#                 stk.append(f)
+#             elif f == ')':
+#                 while stk:
+#                     ope = stk.pop()
+#                     if ope == '(': break
+#                     else:
+#                         postfix.append(ope)
+#             else:
+#                 while stk:
+#                     if ope_dict[f] <= ope_dict[stk[-1]]:
+#                         postfix.append(stk.pop())
+#                     if not stk or ope_dict[f] > ope_dict[stk[-1]]:
+#                         stk.append(f)
+#                         break
+#     while stk:
+#         postfix.append(stk.pop())
+#
+# x`    for f in postfix:
+#         if f.isdigit(): stk.append(int(f))
+#         else:
+#             result = 0
+#             ope1 = int(stk.pop())
+#             ope2 = int(stk.pop())
+#             if f == '*':
+#                 result = ope1 * ope2
+#             else:
+#                 result = ope1 + ope2
+#             stk.append(result)
+#         answer = stk[-1]
+#     print('#{} {}'.format(i, answer))
 
-    for f in postfix:
-        if f.isdigit(): stk.append(int(f))
-        else:
-            result = 0
-            ope1 = int(stk.pop())
-            ope2 = int(stk.pop())
-            if f == '*':
-                result = ope1 * ope2
-            else:
-                result = ope1 + ope2
-            stk.append(result)
-        answer = stk[-1]
-    print('#{} {}'.format(i, answer))
-
+print((1, 2)[0])
 

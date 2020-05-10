@@ -19,7 +19,17 @@ class LinkedList:
         self.head = Node(None)
         self.head.next = self.tail
 
-
+    def getValue(self, value):
+        nc = self.nodeCount
+        print('nc :', nc)
+        i = 0
+        curr = self.head
+        while i <= nc:
+            if curr.data == value:
+                return i
+            else:
+                curr = curr.next
+            i += 1
 
     def getAt(self, pos):
 
@@ -157,6 +167,7 @@ L.insertAt(3, c)
 print(L.traverse())
 # L.insertAt(2, c)
 L.popAt(1)
+print(L.getValue(12))
 
 # L.insertAt(1, b)
 # L.insertAt()1
