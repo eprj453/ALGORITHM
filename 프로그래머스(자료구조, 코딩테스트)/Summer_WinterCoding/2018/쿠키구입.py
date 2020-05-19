@@ -1,20 +1,3 @@
-# def solution(cookie):
-#     answer = 0
-#
-#     for i in range(1, len(cookie)):
-#         left, right = cookie[:i], cookie[i:]
-#         left_set, right_set = set(), set()
-#         l_sum, r_sum = 0, 0
-#         for j in range(i - 1, -1, -1):
-#             l_sum += left[j]
-#             left_set.add(l_sum)
-#         for j in range(len(right)):
-#             r_sum += right[j]
-#             right_set.add(r_sum)
-#         if left_set & right_set:
-#             answer = max(answer, max(left_set & right_set))
-#     return answer
-
 def solution(cookie):
     answer = 0
 
