@@ -1,65 +1,18 @@
-from collections import deque
-#
-#
-# def solution(customer, K):
-#     answer = []
-#     wait = []
-#     customer_dict, wait_dict, room_dict = {}, {}, {}
-#     for c in customer:
-#         customer_id, request = c[0], c[1]
-#         if request == 1:  # 방 예약
-#             if len(answer) < K:  # 남은 방 있을 경우
-#                 room_dict[customer_id] = 1
-#             else:
-#                 wait.append(customer_id)
-#         else:  # 예약 취소
-#             if customer_id in answer:
-#                 answer.remove(customer_id)
-#                 if wait:  # 대기 손님 있을 경우
-#                     answer.append(wait.pop(0))
-#             else:
-#                 wait.remove(customer_id)
-#
-#     return sorted(answer)
+def find_children(node, children):
+    count = 0
+    if not children[node]:
+        return 1
+    for x in children[node]:
+        count += find_children(x, children)
+    return count
+def solution(total_sp, skills):
+    answer = []
+    children_count = [0] * (len(skills) + 1)
+    children = [[] for x in range(len(skills)+2)]
+    for skill in skills:
+        parent, child = skill
+        children[parent].append(child)
+    for x in range(1, len(skills)+2):
+        print(find_children(x, children))
 
-from queue import PriorityQueue
-# import time
-# def solution(customer, K):
-#     answer = []
-#     wait, room = PriorityQueue(), []
-#     for c in customer:
-#         customer_id, request = c[0], c[1]
-#         if request == 1:  # 방 예약
-#             if len(room) < K:
-#                 room.append(customer_id)
-#             else:
-#                 wait.put((time.time(), customer_id))
-#         else:  # 예약 취소
-#             if customer_id in room:
-#                 room.remove(customer_id)
-#             else:
-#
-#     return sorted(room)
-
-# print(solution([[4, 1], [3, 1], [2, 1], [4, 0], [1, 1], [1, 0], [4, 1], [4, 0]], 3))
-# print(solution([[2, 1], [3, 1], [4, 1], [3, 0], [1, 1], [2, 0], [4, 0], [2, 1]], 3))
-# print(solution([[3, 1], [4, 1], [4, 0], [3, 0], [2, 1], [1, 1]], 2))
-# print(solution([[2, 1], [1, 1], [3, 1], [1, 0], [1, 1], [2, 0], [2, 1]], 1))
-
-# di = {
-#     1: 1,
-#     2: 1,
-#     3: 1,
-#
-# }
-# print(sorted(di))
-#
-# d = deque()
-# d.append(1, 2, 3)
-# d.
-
-d = PriorityQueue()
-d.put((1, 'a'))
-d.put((2, 'b'))
-d.put((3, 'c'))
-print(d.get_nowait())
+print(solution(121, [[1, 2], [1, 3], [3, 6], [3, 4], [3, 5]]))
