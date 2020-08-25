@@ -32,7 +32,7 @@ MST가 유일하게 1개만 존재하는 것은 아니다(그래프의 모양은
 
 사이클이 없는 무방향 그래프도 Tree가 될 수 있다.
 
-만약 사이클이 만들어진다면 Node의 중복연결이 이루어지므로 모든 가중치의 합이 최소라는 조건을충족하지 못한다.
+만약 사이클이 만들어진다면 Node의 중복연결이 이루어지므로 모든 가중치의 합이 최소라는 조건을 충족하지 못한다.
 
 
 
@@ -82,7 +82,7 @@ Generic MST(G, w):
 
 
 
-lighest edge는 Edge의 집합 A에 대해 안전하다.
+lightest edge는 Edge의 집합 A에 대해 안전하다.
 
 ![unnamed](https://user-images.githubusercontent.com/52685258/81220906-0aed5a00-901d-11ea-918a-6e621299e83f.png)
 

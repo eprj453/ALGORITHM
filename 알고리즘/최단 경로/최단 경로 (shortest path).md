@@ -163,7 +163,7 @@ for i in range(1, v):
 
 
 
-## All - to - All 알고리즘 (floyd-warshall)
+## floyd-warshall 알고리즘
 
 모든 노드 쌍들간의 최단경로의 길이를 구함.
 

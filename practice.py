@@ -47,34 +47,69 @@
 #     print(answer)
 
 # dijk(1, 3)
-n, k = map(int, input().split())
-max_value = 0
-answer = 0.0
-cookies = []
-for _ in range(n):
-    cookie = float(input())
-    max_value += cookie
-    cookies.append(cookie)
-start, end = 0, max_value
+# n, k = map(int, input().split())
+# max_value = 0
+# answer = 0.0
+# cookies = []
+# for _ in range(n):
+#     cookie = float(input())
+#     max_value += cookie
+#     cookies.append(cookie)
+# start, end = 0, max_value
+#
+# while start <= end:
+#     cookie_count = 0
+#
+#     mid = (start + end) / 2
+#     for c in cookies:
+#         can_make = c // mid
+#         cookie_count += can_make
+#     print('cookie_count : {}'.format(cookie_count))
+#     print('start : {}'.format(start))
+#     print('end : {}'.format(end))
+#     print('mid : {}'.format(mid))
+#     print()
+#     if cookie_count == k:
+#         answer = mid
+#
+#     if cookie_count >= k:
+#         start = mid + 0.0001
+#     else:
+#         end = mid - 0.0001
+#
+# print(answer)
 
-while start <= end:
-    cookie_count = 0
+import pandas as pd
+import numpy as np
 
-    mid = (start + end) / 2
-    for c in cookies:
-        can_make = c // mid
-        cookie_count += can_make
-    print('cookie_count : {}'.format(cookie_count))
-    print('start : {}'.format(start))
-    print('end : {}'.format(end))
-    print('mid : {}'.format(mid))
-    print()
-    if cookie_count == k:
-        answer = mid
+data = pd.read_csv('temp.csv', sep=',')
+for t in data['tall']:
+    if t == min(data['tall']):
+        print(t)
 
-    if cookie_count >= k:
-        start = mid + 0.0001
+
+def operation(string):
+    num1, num2, operator = '', '', ''
+    for st in string:
+        if st == ' ': continue
+        if st.isdigit():
+            if operator:
+                num2 += st
+            else:
+                num1 += st
+        else:
+            operator += st
+
+    if operator == '+':
+        return num1 + num2
+    elif operator == '-':
+        return num1 - num2
+    elif operator == '*':
+        return num1 * num2
     else:
-        end = mid - 0.0001
+        return num1 / num2
 
-print(answer)
+ope = '123123       + 12345'
+print(operation(ope))
+
+
