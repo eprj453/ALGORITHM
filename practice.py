@@ -77,39 +77,8 @@
 #     else:
 #         end = mid - 0.0001
 #
-# print(answer)
+# print(answe
 
-import pandas as pd
-import numpy as np
-
-data = pd.read_csv('temp.csv', sep=',')
-for t in data['tall']:
-    if t == min(data['tall']):
-        print(t)
-
-
-def operation(string):
-    num1, num2, operator = '', '', ''
-    for st in string:
-        if st == ' ': continue
-        if st.isdigit():
-            if operator:
-                num2 += st
-            else:
-                num1 += st
-        else:
-            operator += st
-
-    if operator == '+':
-        return num1 + num2
-    elif operator == '-':
-        return num1 - num2
-    elif operator == '*':
-        return num1 * num2
-    else:
-        return num1 / num2
-
-ope = '123123       + 12345'
-print(operation(ope))
-
-
+x = [(0 ,1), (0, 0)]
+print(x[0][1])
+print(sorted(x))
