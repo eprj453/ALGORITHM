@@ -79,6 +79,4 @@
 #
 # print(answe
 
-x = [(0 ,1), (0, 0)]
-print(x[0][1])
-print(sorted(x))
+print(sorted(1,2,3))
