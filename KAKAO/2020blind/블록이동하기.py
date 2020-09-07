@@ -1,20 +1,22 @@
 def check(coor_1, coor_2, board, flag):
     n = len(board)
     dir_dict = {
-        'vertical': {
+        'horizontal': {
             'move_hor': [(0, -1), (0, 1)],
             'move_ver': [(-1, 0), (1, 0)]
         },
-        'horizontal': {
+        'vertical': {
             'move_hor': [(-1, 0), (1, 0)],
             'move_ver': [(0, 1), (0, -1)]
 
         }
     }
     if flag == 'vertical':
+        print('vertical')
         move_ver = dir_dict.get('vertical').get('move_ver')
         move_hor = dir_dict.get('vertical').get('move_hor')
     else:
+        print('hor')
         move_ver = dir_dict.get('horizontal').get('move_ver')
         move_hor = dir_dict.get('horizontal').get('move_hor')
 
@@ -27,8 +29,8 @@ def check(coor_1, coor_2, board, flag):
         else:
             new_coor1 = (coor_1[0]+dx, coor_1[1]+dy)
             new_coor2 = (coor_2[0]+dx, coor_2[1]+dy)
-
-            tmp_coor1 = tuple(sorted([new_coor1, coor_1]))
+            print('vertical : ', new_coor1, new_coor2)
+            tmp_coor1 = tuple(sorted([coor_1, new_coor1]))
             tmp_coor2 = tuple(sorted([new_coor2, coor_2]))
             tmp_coor3 = tuple(sorted([new_coor1, new_coor2]))
             result.append(tmp_coor1)
@@ -42,6 +44,7 @@ def check(coor_1, coor_2, board, flag):
             not board[x_1+dx][y_1+dy] and not board[x_2+dx][y_2+dy]:
             new_coor1 = (x_1+dx, y_1+dy)
             new_coor2 = (x_2+dx, y_2+dy)
+            print(' hor : ', new_coor1, new_coor2)
             result.append((new_coor1, new_coor2))
 
     return result
@@ -68,7 +71,10 @@ def solution(board):
     robot = [((0, 0), (0, 1))]
 
     while robot:
+
+
         direction = robot.pop(0)
+        print('direction : ', direction)
         # print(direction)
         x1, y1, x2, y2 = direction[0][0], direction[0][1], direction[1][0], direction[1][1]
         if x1 == x2:
