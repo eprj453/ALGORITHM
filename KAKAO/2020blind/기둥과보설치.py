@@ -20,7 +20,7 @@ def can_build_or_delete(build_dict, build):
             if build_dict.get((x, y, 1)):
                 if build_dict.get((x-1, y, 0)):
                     return True
-            if not build_dict.get((x+1, y, 1)) and not build_dict.get((x+1, y, 0)): # 연결되어 있는 보도 없고 받치고 있는 기둥도 없을 경우
+            if not build_dict.get((x+1, y, 1)) and not build_dict.get((x+1, y, 0)) and not build_dict.get((x, y, 0)): # 연결되어 있는 보도 없고 받치고 있는 기둥도 없을 경우
                 return True
 
     return False

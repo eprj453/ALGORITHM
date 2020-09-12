@@ -79,4 +79,5 @@
 #
 # print(answe
 
-print(((1), (2)) == ((2), (1)))
+a = 'abcdefgh'
+print(a[:4])
