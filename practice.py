@@ -79,5 +79,50 @@
 #
 # print(answe
 
-a = 'abcdefgh'
-print(a[:4])
+class SSN:
+    def __init__(self, data):
+        if not isinstance(data, str):
+            raise TypeError("문자열이 아닙니다.")
+        elif not (data[0:6].isdigit() or data[6] == "-" and data[7:].isdigit()):
+            raise TypeError("주민등록번호 양식이 아닙니다.")
+        elif len(data) != 14:
+            raise TypeError("14자의 길이가 아닙니다")
+        self.data = data
+
+    def birthday(self):
+        import datetime
+        if self.data[7] in ['1', '2', '5', '6']:
+            year = 1900 + int(self.data[0:2])
+        elif self.data[7] in ['3', '4', '7', '8']:
+            year = 2000 + int(self.data[0:2])
+        else:
+            year = 1800 + int(self.data[0:2])
+        month = int(self.data[2:4])
+        day = int(self.data[4:6])
+        return datetime.date(year, month, day)
+
+    def gender(self):
+        import datetime
+        if int(self.data[7] in ['1', '3', '5', '7', '9']):
+            gender = True
+        else:
+            gender = False
+        return gender
+
+    def age(self):
+        import datetime
+        today = int(datetime.date.today().strftime("%Y%m%d"))
+        birthday = int(self.birthday().strftime("%Y%m%d"))
+        age = (today - birthday) // 10000
+        return age
+
+
+datas = ["920515-1133555", "871209-2233777", "080209-4455666"]
+for data in datas:
+    obj = SSN(data)
+    print(f"생년월일: {obj.birthday()}")
+    print(f"만나이: {obj.age()}")
+    if obj.gender():
+        print("성별:남")
+    else:
+        print("성별:여")
