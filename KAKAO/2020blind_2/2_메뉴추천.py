@@ -7,7 +7,6 @@ def solution(orders, course):
             if i in course:
                 comb = combinations(order, i)
                 for c in comb:
-
                     c = tuple(sorted(list(c)))
                     print(c)
                     menu_dict[c] = menu_dict.get(c, 0) + 1
