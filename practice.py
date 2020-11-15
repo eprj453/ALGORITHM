@@ -80,54 +80,99 @@
 # print(answe
 
 
-import requests
-import pandas as pd
+# url = 'http://apis.data.go.kr/1611000/DceDgnssIdxService/getIdxOparea?'
+#
+# serviceKey = '58vxMI8sB6fw8%2BIjFlgpquKMFDNff69sl%2FA0wHlskhx7O3NS1ElZEGW7FWOwshgtLdQlRYhKP%2BW6FHWKi%2Bg7oQ%3D%3D'
+#
+# cd = pd.read_csv('bnd_oa_bnd_oa_3901.csv', engine='python')
+# idx_codes = pd.read_excel('bnd_oa_bnd_oa_39_idxcd.xlsx')
+#
+# column_name = {
+#     'SIGNGU_CODE': 'signguCd',
+#     'EMD_CODE': 'emdCd',
+#     'OPAREA_CODE': 'opareaCd'
+# }
+#
+# url += f'&serviceKey={serviceKey}'
+#
+# columns = ['emdCd', 'emdNm', 'opareaCd', 'idxCd', 'year', 'idxMean', 'value', 'valueCd']
+#
+# for year in ['2015']:
+#     df = pd.DataFrame(columns=columns)
+#     df.to_csv(f'{year}.csv', mode='w', header=None)
+#     url += f'&year={year}'
+#     year_cut = len(url)
+#     for i in range(cd.shape[0]):
+#         cd_row = cd.loc[i]
+#         cd_cut = len(url)
+#         for code in column_name.keys():
+#             key = column_name.get(code)
+#             url += f'&{key}={int(cd_row.get(code))}'
+#         idx_cut = len(url)
+#         for j in range(idx_codes.shape[0]):
+#             idx_row = idx_codes.loc[j]
+#             idx_code = idx_row.get('지표코드')
+#             url += f'&idxCd={idx_code}'
+#             response = requests.get(url).json()
+#             if response.get('header').get('resultCode') == '00':
+#                 body = response.get('body')
+#                 append_row = []
+#                 for c in columns:
+#                     append_row.append(body.get(c, ''))
+#                 write_row = pd.DataFrame([append_row])
+#             else:
+#                 write_row = pd.DataFrame(
+#                     [['', '', cd_row.get('EMD_CODE'), cd_row.get('EMD_NM'), cd_row.get('OPAREA_CODE'), '', '', '']])
+#             write_row.to_csv(f'{year}.csv', mode='a', header=None)
+#
+#             url = url[:idx_cut]
+#         url = url[:cd_cut]
+#     url = url[:year_cut]
 
-url = 'http://apis.data.go.kr/1611000/DceDgnssIdxService/getIdxOparea?'
+def index_2d(arr, ele, n):
+    pos = [0, 0]
+    for i in range(n):
+        for j in range(n):
+            if arr[i][j] == ele:
+                return [i, j]
+    return pos
 
-serviceKey = '58vxMI8sB6fw8%2BIjFlgpquKMFDNff69sl%2FA0wHlskhx7O3NS1ElZEGW7FWOwshgtLdQlRYhKP%2BW6FHWKi%2Bg7oQ%3D%3D'
+def find_shortest_way(start, end, n):
+    start_x, start_y = start
+    end_x, end_y = end
 
-cd = pd.read_csv('bnd_oa_bnd_oa_3901.csv', engine='python')
-idx_codes = pd.read_excel('bnd_oa_bnd_oa_39_idxcd.xlsx')
+    shortest_x = min(abs(start_x - end_x), (start_x + (n-1 - end_x) + 1), (end_x + (n-1 - start_x) + 1))
+    shortest_y = min(abs(start_y - end_y), (start_y + (n-1 - end_y) + 1), (end_y + (n-1 - start_y) + 1))
 
-column_name = {
-    'SIGNGU_CODE': 'signguCd',
-    'EMD_CODE': 'emdCd',
-    'OPAREA_CODE': 'opareaCd'
-}
+    return shortest_x + shortest_y + 1# 가장 짧게 이동한 x 거리 + 가장 짧게 이동한 y 거리 + enter
 
-url += f'&serviceKey={serviceKey}'
+def solution(n, board):
+    answer = 0
+    start = [0, 0]
+    erase_numbers = list(range(1, (n**2)+1))
+    for num in erase_numbers:
+        next_number_index = index_2d(board, num, n)
+        answer += find_shortest_way(start, next_number_index, n)
+        start = next_number_index
 
-columns = ['emdCd', 'emdNm', 'opareaCd', 'idxCd', 'year', 'idxMean', 'value', 'valueCd']
+    return answer
 
-for year in ['2015']:
-    df = pd.DataFrame(columns=columns)
-    df.to_csv(f'{year}.csv', mode='w', header=None)
-    url += f'&year={year}'
-    year_cut = len(url)
-    for i in range(cd.shape[0]):
-        cd_row = cd.loc[i]
-        cd_cut = len(url)
-        for code in column_name.keys():
-            key = column_name.get(code)
-            url += f'&{key}={int(cd_row.get(code))}'
-        idx_cut = len(url)
-        for j in range(idx_codes.shape[0]):
-            idx_row = idx_codes.loc[j]
-            idx_code = idx_row.get('지표코드')
-            url += f'&idxCd={idx_code}'
-            response = requests.get(url).json()
-            if response.get('header').get('resultCode') == '00':
-                body = response.get('body')
-                append_row = []
-                for c in columns:
-                    append_row.append(body.get(c, ''))
-                write_row = pd.DataFrame([append_row])
-            else:
-                write_row = pd.DataFrame(
-                    [['', '', cd_row.get('EMD_CODE'), cd_row.get('EMD_NM'), cd_row.get('OPAREA_CODE'), '', '', '']])
-            write_row.to_csv(f'{year}.csv', mode='a', header=None)
 
-            url = url[:idx_cut]
-        url = url[:cd_cut]
-    url = url[:year_cut]
+
+arr = [[3, 5, 6],
+       [9, 2, 7],
+       [4, 1, 8]]
+
+arr2 = [[11, 9, 8, 12],
+        [2, 15, 4, 14],
+        [1, 10, 16, 3],
+        [13, 7, 5, 6]]
+arr3 = [[2, 3], [4, 1]]
+print(solution(2, arr3))
+
+logs = ["0001 3 95", "0001 5 90", "0001 5 100", "0002 3 95", "0001 7 80"," 0002 5 100", "0003 99 90"]
+
+for log in logs:
+    stu_num, test_num, grade = log.split()
+    print(stu_num, test_num, grade)
+
