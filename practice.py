@@ -129,50 +129,109 @@
 #         url = url[:cd_cut]
 #     url = url[:year_cut]
 
-def index_2d(arr, ele, n):
-    pos = [0, 0]
-    for i in range(n):
-        for j in range(n):
-            if arr[i][j] == ele:
-                return [i, j]
-    return pos
+# def index_2d(arr, ele, n):
+#     pos = [0, 0]
+#     for i in range(n):
+#         for j in range(n):
+#             if arr[i][j] == ele:
+#                 return [i, j]
+#     return pos
+#
+# def find_shortest_way(start, end, n):
+#     start_x, start_y = start
+#     end_x, end_y = end
+#
+#     shortest_x = min(abs(start_x - end_x), (start_x + (n-1 - end_x) + 1), (end_x + (n-1 - start_x) + 1))
+#     shortest_y = min(abs(start_y - end_y), (start_y + (n-1 - end_y) + 1), (end_y + (n-1 - start_y) + 1))
+#
+#     return shortest_x + shortest_y + 1# 가장 짧게 이동한 x 거리 + 가장 짧게 이동한 y 거리 + enter
+#
+# def solution(n, board):
+#     answer = 0
+#     start = [0, 0]
+#     erase_numbers = list(range(1, (n**2)+1))
+#     for num in erase_numbers:
+#         next_number_index = index_2d(board, num, n)
+#         answer += find_shortest_way(start, next_number_index, n)
+#         start = next_number_index
+#
+#     return answer
+#
+#
+#
+# arr = [[3, 5, 6],
+#        [9, 2, 7],
+#        [4, 1, 8]]
+#
+# arr2 = [[11, 9, 8, 12],
+#         [2, 15, 4, 14],
+#         [1, 10, 16, 3],
+#         [13, 7, 5, 6]]
+# arr3 = [[2, 3], [4, 1]]
+# print(solution(2, arr3))
+#
+# logs = ["0001 3 95", "0001 5 90", "0001 5 100", "0002 3 95", "0001 7 80"," 0002 5 100", "0003 99 90"]
+#
+# for log in logs:
+#     stu_num, test_num, grade = log.split()
+#     print(stu_num, test_num, grade)
 
-def find_shortest_way(start, end, n):
-    start_x, start_y = start
-    end_x, end_y = end
-
-    shortest_x = min(abs(start_x - end_x), (start_x + (n-1 - end_x) + 1), (end_x + (n-1 - start_x) + 1))
-    shortest_y = min(abs(start_y - end_y), (start_y + (n-1 - end_y) + 1), (end_y + (n-1 - start_y) + 1))
-
-    return shortest_x + shortest_y + 1# 가장 짧게 이동한 x 거리 + 가장 짧게 이동한 y 거리 + enter
-
-def solution(n, board):
-    answer = 0
-    start = [0, 0]
-    erase_numbers = list(range(1, (n**2)+1))
-    for num in erase_numbers:
-        next_number_index = index_2d(board, num, n)
-        answer += find_shortest_way(start, next_number_index, n)
-        start = next_number_index
-
-    return answer
+from itertools import permutations
 
 
+def is_less_than_number(arr, num):
+    for i in range(len(arr)-1):
+        if abs(arr[i] - arr[i+1]) > num:
+            return False
+    return True
 
-arr = [[3, 5, 6],
-       [9, 2, 7],
-       [4, 1, 8]]
+def count_difference(arr1, arr2):
+    cnt = 0
 
-arr2 = [[11, 9, 8, 12],
-        [2, 15, 4, 14],
-        [1, 10, 16, 3],
-        [13, 7, 5, 6]]
-arr3 = [[2, 3], [4, 1]]
-print(solution(2, arr3))
+    for i in range(len(arr1)):
+        if arr1[i] != arr2[i]:
+            cnt += 1
 
-logs = ["0001 3 95", "0001 5 90", "0001 5 100", "0002 3 95", "0001 7 80"," 0002 5 100", "0003 99 90"]
+    return cnt
 
-for log in logs:
-    stu_num, test_num, grade = log.split()
-    print(stu_num, test_num, grade)
+arr = [3, 7, 2, 8, 6, 4, 5, 1]
+n = 3
+all_arr = list(permutations(arr, len(arr)))
+
+possible_arr = []
+for a in all_arr:
+    if is_less_than_number(a, n):
+        possible_arr.append(a)
+
+min_count_arr = []
+cnt = len(arr)
+for a in possible_arr:
+    diff_cnt = count_difference(arr, a)
+    if diff_cnt < cnt:
+        min_count_arr = [a]
+        cnt = diff_cnt
+    elif diff_cnt == cnt:
+        min_count_arr.append(a)
+
+
+
+print(cnt)
+print(min_count_arr)
+
+# for arr in all_list:
+'''
+[1, 2, 3, 4, 5, 6 ,7, 8]
+[3, 5, 7, 6, 1, 2, 8, 4]
+
+[3, 2, 1, 4, 5, 6 ,7, 8]
+
+
+'''
+
+
+
+'''
+[10, 20, 30, 40, 50]
+
+'''
 
