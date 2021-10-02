@@ -1,3 +1,4 @@
+
 n, m = map(int, input().split())
 moneys = [int(input()) for _ in range(n)]
 print(moneys)

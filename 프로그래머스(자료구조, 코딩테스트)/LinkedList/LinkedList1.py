@@ -31,6 +31,18 @@ class LinkedList:
                 curr = curr.next
             i += 1
 
+    def getInputIdx(self, value):
+        nc = self.nodeCount
+        i = 0
+        curr = self.head
+        while i <= nc:
+            if curr.data and curr.data > value:
+                return i
+            else:
+                curr = curr.next
+            i += 1
+        return i
+
     def getAt(self, pos):
 
         # Dummy node 전
@@ -101,6 +113,7 @@ class LinkedList:
             prev = self.getAt(pos-1)
         return self.insertAfter(prev, newNode)
 
+
     def insertAfter(self, prev, newNode):
         newNode.next = prev.next
         if prev.next == None:
@@ -108,6 +121,8 @@ class LinkedList:
         prev.next = newNode
         self.nodeCount += 1
         return True
+
+
     def popAt(self, pos):
         # popNode = self.getAt(pos)
         if pos < 1 or pos > self.nodeCount: # 0 미만 원소 길이 이상
@@ -135,16 +150,6 @@ class LinkedList:
 
         self.nodeCount -= 1
         return popNode.data
-        # else:
-        #     if pos == self.nodeCount: # 맨 끝 node의 삭제
-        #         self.tail = self.getAt(pos-1) # node의 맨 끝을 그 앞 원소로
-        #     elif pos == 1: # 맨 앞 node의 삭제
-        #
-
-
-    # def popAfter(self, prev):
-
-
 
     def concat(self, L): # 연결 리스트 합치는 연산
         self.tail.next = L.head
@@ -152,25 +157,38 @@ class LinkedList:
             self.tail = L.tail
         self.nodeCount += L.nodeCount
         return True
-L = LinkedList()
 
-a = Node(67)
+
+
+def solution(n, k, cmd):
+
+    L = LinkedList()
+    for i in range(n):
+        node = Node(i)
+        L.insertAt(i, node)
+
+    print(L.traverse())
+
+
+# solution(8, 2, ["D 2","C","U 3","C","D 4","C","U 2","Z","Z"])
+
+L = LinkedList()
+a = Node(12)
 b = Node(30)
-c = Node(12)
-d = Node(27)
+c = Node(47)
+d = Node(68)
+
 L.insertAt(1, a)
 L.insertAt(2, b)
 L.insertAt(3, c)
-# L.insertAt(4, d)
-# L.insertAfter(1, a)
-# print(L.getAt(3).data)
-print(L.traverse())
-# L.insertAt(2, c)
-L.popAt(1)
-print(L.getValue(12))
+L.insertAt(4, d)
 
-# L.insertAt(1, b)
-# L.insertAt()1
-# print(L.nodeCount)
+L.popAt(3)
 print(L.traverse())
-# print(L.getAt(1).item)
+# L.popAt(1)
+# print(L.getValue(12))
+idx = L.getInputIdx(50)
+
+L.insertAt(idx, Node(50))
+print(L.traverse())
+# print(L.traverse())

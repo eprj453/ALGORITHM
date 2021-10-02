@@ -1,26 +1,47 @@
-from queue import PriorityQueue
 import heapq
+
+
+
+
+# class Food:
+#     def __init__(self, i ,x):
+#         self.i = i
+#         self.x = x
+#
+#
+#     def __lt__(self, other):
+#         if self.x < other.x:
+#             return True
+#         elif self.x == other.x:
+#             return self.i > other.i
+#         else:
+#             return False
+
 def solution(food_times, k):
+    answer = -1
+
     hq = []
-    answer = 0
     heapq.heapify(hq)
-    for i in range(len(food_times)):
-        heapq.heappush(hq, (food_times[i], i+1))
-    # print(hq)
+    for i, food_time in enumerate(food_times):
+        heapq.heappush(hq, (food_time, i+1))
+    #
+    # while hq:
+    #     print(heapq.heappop(hq))
+    while hq:
+        # total_food_count = len(hq)
 
-    pre = 0
-    remain = k
-    length = len(hq)
-    sum_value = 0
-    while sum_value + (((hq[0][0]) - pre) * length):
-        
+        current_food = heapq.heappop(hq)
+        left_food_count = len(hq)
+        food_time_for_this_food, food_index = current_food
+        if k > (left_food_count * food_time_for_this_food):
+            print(k)
+
+            k -= (left_food_count * food_time_for_this_food)
+        else:
+            return food_index
+
+    return answer
 
 
-    hq.sort(key=lambda x:x[1])
-    print(hq)
-    print()
-    return hq[(remain % len(hq))][1]
 
-# print(solution([3,1,2], 5))
-# print(solution([8,6,9,5,2,2], 12))
-print(solution([7,9,1,2,5,3], 13))
+print(solution([8,6,4],15))

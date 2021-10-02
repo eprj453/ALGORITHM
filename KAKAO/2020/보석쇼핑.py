@@ -1,23 +1,44 @@
 def solution(gems):
-    answer = []
-    start, end = 0, 0
-    gems_set = set(gems)
-    gems_len = len(gems_set)
-    while gems_len < len(gems) + 1:
-        if start or end:
-            break
-        i = 0
-        while i < len(gems) - gems_len + 1:
-            print(gems[i:i+gems_len])
-            if gems_set == set(gems[i:i+gems_len]):
-                start, end = i+1, i+gems_len
-                break
-            i += 1
-        gems_len += 1
-    answer = [start, end]
-    return answer
+    n = len(gems)
+    all_gems = list(set(gems))
 
-print(solution(["DIA", "RUBY", "RUBY", "DIA", "DIA", "EMERALD", "SAPPHIRE", "DIA"]))
-# print(solution(["AA", "AB", "AC", "AA", "AC"]))
-# print(solution(["XYZ", "XYZ", "XYZ"]))
-# print(solution(["ZZZ", "YYY", "NNNN", "YYY", "BBB"]))
+    gem_dict = {
+
+    }
+
+    left, right = 0, 0
+    min_distance = 100_001
+    memo_coop = [0, 0]
+    while left <= right < n:
+        print(left, right)
+        if len(gem_dict) < len(all_gems):
+            g = gems[right]
+            gem_dict[g] = gem_dict.get(g, 0) + 1
+
+        elif len(gem_dict) == len(all_gems):
+            distance = right - left
+
+            if distance < min_distance:
+                min_distance = distance
+                memo_coop = [left+1, right+1]
+
+            g = gems[left]
+            gem_dict[g] = gem_dict.get(g, 0) - 1
+
+            if not gem_dict[g]:
+                del gem_dict[g]
+
+            left += 1
+
+        if len(gem_dict) < len(all_gems):
+            right += 1
+    print(min_distance)
+    return memo_coop
+
+# print(solution(["DIA", "RUBY", "RUBY", "DIA", "DIA", "EMERALD", "SAPPHIRE", "DIA"]))
+# print(solution(["DIA", "RUBY", "RUBY", "DIA", "DIA", "EMERALD", "SAPPHIRE", "DIA", "RUBY", "DIA", "SAPPHIRE", "EMERALD"]))
+
+# "DIA", "RUBY", "RUBY", "DIA", "DIA", "EMERALD", "SAPPHIRE", "DIA", "RUBY", "DIA", "SAPPHIRE", "EMERALD"
+
+
+print(solution(["ZZZ", "YYY", "NNNN", "YYY", "BBB"]))
