@@ -10,7 +10,6 @@ T101.id
 from
 Stadium T101
 )
-
 select 
 T102.id
 , T102.visit_date
