@@ -12,11 +12,11 @@ public class Sudoku2580 {
 
         for (int i = 0; i < 9; i++) {
             StringTokenizer line = new StringTokenizer(br.readLine());
-            for (int j=0; j < 9; j++) {
+            for (int j = 0; j < 9; j++) {
                 sudokuBoard[i][j] = Integer.parseInt(line.nextToken());
 
+            }
         }
-
 
     }
 }
